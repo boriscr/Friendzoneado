@@ -5,14 +5,16 @@
       <div class="header-left">
         <div class="avatar">
           <span class="avatar-letter">
-            <img class="avatar-img" src="https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp" alt="">
+            <img class="avatar-img"
+              src="https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp" alt="">
           </span>
           <span class="status-dot" :class="{ online: !isChapterEnded }"></span>
         </div>
         <div class="header-info">
           <h2 class="contact-name">Valeria</h2>
           <p class="contact-status">
-            <template v-if="store.isTyping">escribiendo…</template>
+            <template v-if="store.isRecording">grabando audio…</template>
+            <template v-else-if="store.isTyping">escribiendo…</template>
             <template v-else-if="isChapterEnded">desconectada</template>
             <template v-else>en línea</template>
           </p>
@@ -35,17 +37,10 @@
     <!-- Messages area -->
     <div class="messages-area" ref="messagesContainer">
       <div class="messages-list">
-        <MessageBubble
-          v-for="msg in store.chatHistory"
-          :key="msg.id + '-' + msg.timestamp"
-          :message="msg"
-        />
+        <MessageBubble v-for="msg in store.chatHistory" :key="msg.id + '-' + msg.timestamp" :message="msg" />
 
-        <!-- Typing indicator -->
-        <TypingIndicator
-          v-if="store.isTyping"
-          :sender="store.typingSender"
-        />
+        <!-- Typing / Recording indicator -->
+        <TypingIndicator v-if="store.isTyping || store.isRecording" :sender="store.typingSender" />
 
         <!-- Scroll anchor -->
         <div ref="scrollAnchor"></div>
@@ -53,11 +48,7 @@
     </div>
 
     <!-- Choice panel -->
-    <ChoicePanel
-      v-if="engine.isWaitingForChoice.value"
-      :choices="engine.choices.value"
-      @select="handleChoice"
-    />
+    <ChoicePanel v-if="engine.isWaitingForChoice.value" :choices="engine.choices.value" @select="handleChoice" />
   </div>
 </template>
 
@@ -90,6 +81,10 @@ watch(() => store.chatHistory.length, () => {
 })
 
 watch(() => store.isTyping, () => {
+  scrollToBottom()
+})
+
+watch(() => store.isRecording, () => {
   scrollToBottom()
 })
 

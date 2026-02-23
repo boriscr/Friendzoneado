@@ -18,6 +18,7 @@ export const useGameStore = defineStore('game', () => {
     const currentNodeId = ref(null)
     const isTyping = ref(false)
     const isReading = ref(false)
+    const isRecording = ref(false)
     const typingSender = ref('')
 
     // ── Actions: player name ────────────────────────────
@@ -87,7 +88,10 @@ export const useGameStore = defineStore('game', () => {
                 Object.assign(gameState, data.gameState)
                 chatHistory.value = data.chatHistory || []
                 currentNodeId.value = data.currentNodeId || null
-                gameStarted.value = data.gameStarted ?? false
+                // safety: don't overwrite true with false from old progress
+                if (data.gameStarted) {
+                    gameStarted.value = true
+                }
             } catch (e) {
                 console.warn('Failed to load saved progress:', e)
             }
@@ -103,6 +107,7 @@ export const useGameStore = defineStore('game', () => {
         currentNodeId.value = null
         isTyping.value = false
         isReading.value = false
+        isRecording.value = false
         typingSender.value = ''
         Preferences.remove({ key: 'gameProgress' })
         Preferences.remove({ key: 'playerName' })
@@ -117,6 +122,7 @@ export const useGameStore = defineStore('game', () => {
         currentNodeId,
         isTyping,
         isReading,
+        isRecording,
         typingSender,
         // actions
         setPlayerName,

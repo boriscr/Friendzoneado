@@ -87,6 +87,35 @@ export function useDialogEngine() {
             return
         }
 
+        // ── Fake typing: typing indicator cycles, no message ─
+        if (node.type === 'typing_fake') {
+            const cycles = node.typingCycles || 3
+            for (let i = 0; i < cycles; i++) {
+                store.isTyping = true
+                store.typingSender = node.sender
+                playSound('typing')
+                // Type for a random duration (1.5-3s)
+                await sleep(1500 + Math.random() * 1500)
+                store.isTyping = false
+                store.typingSender = ''
+                // Pause between cycles (0.8-2s)
+                if (i < cycles - 1) {
+                    await sleep(800 + Math.random() * 1200)
+                }
+            }
+
+            // Execute any actions (like disconnecting)
+            executeActions(node.actions)
+            store.currentNodeId = node.nextId
+            await store.saveProgress()
+            isProcessing.value = false
+
+            if (node.nextId) {
+                await processNode(node.nextId)
+            }
+            return
+        }
+
         // ── Simulate "reading" pause after player choice ─
         if (lastWasPlayerChoice.value && node.sender !== 'player' && node.sender !== 'system') {
             // Random delay before NPC "reads" the message (1-3.5s)
@@ -105,16 +134,45 @@ export function useDialogEngine() {
             lastWasPlayerChoice.value = false
         }
 
-        // ── Show typing indicator for NPC messages ───────
-        if (node.sender !== 'player' && node.sender !== 'system' && node.delay > 0) {
-            store.isTyping = true
+        // ── Calculate smart delay based on content ────────
+        function calculateSmartDelay(node) {
+            // If explicit delay is set in JSON, use it as override
+            if (node.delay && node.delay > 0) return node.delay
+
+            const content = node.content || ''
+
+            if (node.type === 'audio') {
+                // Audio messages take longer: 12-18 seconds (simulates recording)
+                return 12000 + Math.random() * 6000
+            } else if (node.type === 'image') {
+                // Images: 3-5 seconds
+                return 3000 + Math.random() * 2000
+            } else {
+                // Text: scale with length (60ms per character, min 1.5s, max 5s)
+                const charDelay = content.length * 60
+                return Math.max(1500, Math.min(5000, charDelay)) + Math.random() * 500
+            }
+        }
+
+        const smartDelay = calculateSmartDelay(node)
+
+        // ── Show typing/recording indicator for NPC messages ─
+        if (node.sender !== 'player' && node.sender !== 'system' && smartDelay > 0) {
+            if (node.type === 'audio') {
+                store.isRecording = true
+            } else {
+                store.isTyping = true
+            }
             store.typingSender = node.sender
             playSound('typing')
-            await sleep(node.delay)
+            await sleep(smartDelay)
             store.isTyping = false
+            store.isRecording = false
             store.typingSender = ''
-        } else if (node.sender === 'system' && node.delay > 0) {
-            await sleep(node.delay)
+        } else if (node.sender === 'system') {
+            // System messages: brief pause scaled to length
+            const sysPause = Math.max(1000, Math.min(3000, (node.content || '').length * 40))
+            await sleep(node.delay || sysPause)
         }
 
         // ── Build the message ────────────────────────────
@@ -130,6 +188,13 @@ export function useDialogEngine() {
         // Play receive sound for NPC/system messages
         if (node.sender !== 'player') {
             playSound('receive')
+        }
+
+        // ── Wait for player to read the message ──────────
+        // Only if there's a next node to process automatically
+        if (node.nextId || node.conditions) {
+            const readingWait = Math.max(1500, Math.min(5500, (node.content || '').length * 55))
+            await sleep(readingWait + Math.random() * 500)
         }
 
         // ── Execute attached actions ─────────────────────

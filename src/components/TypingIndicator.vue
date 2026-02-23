@@ -1,18 +1,31 @@
 <template>
   <div class="typing-indicator">
     <div class="typing-bubble">
-      <span class="typing-name">{{ senderName }} está escribiendo</span>
-      <div class="typing-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+      <template v-if="store.isRecording">
+        <span class="typing-name">🎙️ {{ senderName }} grabando audio</span>
+        <div class="typing-dots recording">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </template>
+      <template v-else>
+        <span class="typing-name">{{ senderName }} está escribiendo</span>
+        <div class="typing-dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useGameStore } from '../stores/gameStore'
+
+const store = useGameStore()
 
 const props = defineProps({
   sender: { type: String, default: '' }
@@ -71,10 +84,14 @@ const senderName = computed(() => {
 }
 
 @keyframes bounce {
-  0%, 60%, 100% {
+
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.4;
   }
+
   30% {
     transform: translateY(-6px);
     opacity: 1;

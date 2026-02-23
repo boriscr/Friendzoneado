@@ -6,24 +6,13 @@
         <div class="app-icon">💬</div>
         <h1 class="app-title">Friendzoneado</h1>
         <p class="app-subtitle">Una historia interactiva que cambiará con cada decisión que tomes.</p>
-        
+
         <form @submit.prevent="handleSubmit" class="name-form">
           <div class="input-wrapper">
-            <input
-              ref="nameInput"
-              v-model="name"
-              type="text"
-              placeholder="Escribe tu nombre..."
-              maxlength="20"
-              autocomplete="off"
-              class="name-input"
-            />
+            <input ref="nameInput" v-model="name" type="text" placeholder="Escribe tu nombre..." maxlength="20"
+              autocomplete="off" class="name-input" />
           </div>
-          <button 
-            type="submit" 
-            class="start-btn"
-            :disabled="!name.trim()"
-          >
+          <button type="submit" class="start-btn" :disabled="!name.trim()">
             Comenzar
             <span class="btn-arrow">→</span>
           </button>
@@ -44,13 +33,21 @@ const name = ref('')
 const nameInput = ref(null)
 
 onMounted(() => {
+  if (store.playerName) {
+    name.value = store.playerName
+  }
   nameInput.value?.focus()
 })
 
 async function handleSubmit() {
   if (!name.value.trim()) return
-  await store.setPlayerName(name.value)
+  store.playerName = name.value.trim()
   store.gameStarted = true
+  try {
+    await store.setPlayerName(name.value)
+  } catch (e) {
+    console.warn('Could not save player name:', e)
+  }
 }
 </script>
 
@@ -91,8 +88,15 @@ async function handleSubmit() {
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -30px) scale(1.1); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
 }
 
 .name-entry-card {
@@ -131,8 +135,15 @@ async function handleSubmit() {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .app-title {

@@ -13,12 +13,8 @@
 
         <!-- Image -->
         <div v-else-if="message.type === 'image'" class="message-image">
-          <img
-            :src="message.content"
-            alt="Imagen"
-            @error="onImageError"
-            loading="lazy"
-          />
+          <img :src="message.content" alt="Imagen" @error="onImageError" @click="openLightbox" loading="lazy"
+            class="image-clickable" />
           <div v-if="imageError" class="image-fallback">
             <span class="fallback-icon">🖼️</span>
             <span class="fallback-text">Imagen no disponible</span>
@@ -32,29 +28,14 @@
             <span v-else>⏸</span>
           </button>
           <div class="audio-waveform">
-            <div
-              class="audio-progress"
-              :style="{ width: audioProgress + '%' }"
-            ></div>
+            <div class="audio-progress" :style="{ width: audioProgress + '%' }"></div>
             <div class="waveform-bars">
-              <span
-                v-for="i in 20"
-                :key="i"
-                class="bar"
-                :style="{ height: getBarHeight(i) + 'px' }"
-              ></span>
+              <span v-for="i in 20" :key="i" class="bar" :style="{ height: getBarHeight(i) + 'px' }"></span>
             </div>
           </div>
           <span class="audio-duration">{{ formattedDuration }}</span>
-          <audio
-            ref="audioEl"
-            :src="message.content"
-            @timeupdate="onTimeUpdate"
-            @ended="onAudioEnded"
-            @loadedmetadata="onMetaLoaded"
-            @error="onAudioLoadError"
-            preload="metadata"
-          ></audio>
+          <audio ref="audioEl" :src="message.content" @timeupdate="onTimeUpdate" @ended="onAudioEnded"
+            @loadedmetadata="onMetaLoaded" @error="onAudioLoadError" preload="metadata"></audio>
         </div>
 
         <!-- Timestamp + Read receipts -->
@@ -67,6 +48,16 @@
         </span>
       </div>
     </div>
+
+    <!-- Lightbox overlay -->
+    <Teleport to="body">
+      <Transition name="lightbox">
+        <div v-if="lightboxOpen" class="lightbox-overlay" @click="closeLightbox">
+          <button class="lightbox-close" @click.stop="closeLightbox">✕</button>
+          <img :src="message.content" alt="Imagen ampliada" class="lightbox-img" @click.stop />
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -86,8 +77,17 @@ const formattedTime = computed(() => {
 
 // ── Image handling ─────────────────────────────────
 const imageError = ref(false)
+const lightboxOpen = ref(false)
 function onImageError() {
   imageError.value = true
+}
+function openLightbox() {
+  if (!imageError.value) {
+    lightboxOpen.value = true
+  }
+}
+function closeLightbox() {
+  lightboxOpen.value = false
 }
 
 // ── Audio handling ─────────────────────────────────
@@ -158,6 +158,7 @@ function onAudioLoadError() {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -348,5 +349,87 @@ function onAudioLoadError() {
 
 .read-receipt.read {
   color: #53bdeb;
+}
+
+/* ── Clickable images ──────────────────────────────── */
+.image-clickable {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.image-clickable:active {
+  opacity: 0.8;
+}
+
+/* ── Lightbox ──────────────────────────────────────── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Lightbox transition */
+.lightbox-enter-active,
+.lightbox-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.lightbox-enter-from,
+.lightbox-leave-to {
+  opacity: 0;
+}
+
+.lightbox-enter-active .lightbox-img {
+  animation: lightbox-zoom 0.25s ease forwards;
+}
+
+@keyframes lightbox-zoom {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 </style>
