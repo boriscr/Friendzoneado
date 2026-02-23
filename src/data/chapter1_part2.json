@@ -1,0 +1,294 @@
+{
+    "chapter": 1,
+    "part": 2,
+    "title": "El Incidente",
+    "characters": {
+        "valeria": {
+            "displayName": "Valeria",
+            "avatar": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp"
+        }
+    },
+    "nodes": [
+        {
+            "id": "start",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Necesito contarte algo, pero es muy difícil por texto. Siento que si lo escribo sonará estúpido.",
+            "nextId": "val_audio_ask"
+        },
+        {
+            "id": "val_audio_ask",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Te mando un audio? Por favor, dime que sí.",
+            "nextId": "choice_audio_accept"
+        },
+        {
+            "id": "choice_audio_accept",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Claro Val, mándalo. Te escucho.",
+                    "nextId": "val_audio_send_1",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "Dime por aquí, no puedo escuchar audios ahora.",
+                    "nextId": "val_audio_refuse",
+                    "impact": {
+                        "valeria_affection": -5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_audio_send_1",
+            "sender": "valeria",
+            "type": "audio",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/chapter_1/1-valeria.mp3",
+            "delay": 15000,
+            "nextId": "val_after_audio"
+        },
+        {
+            "id": "val_audio_refuse",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Entiendo... pero de verdad es importante.",
+            "nextId": "val_audio_refuse_2"
+        },
+        {
+            "id": "val_audio_refuse_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mejor lo intento escribir entonces... aunque mis manos están temblando un poco.",
+            "nextId": "val_reveal_text"
+        },
+        {
+            "id": "val_after_audio",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No me digas que estoy loca, por favor. 🥺",
+            "nextId": "val_reveal_text"
+        },
+        {
+            "id": "val_reveal_text",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Desde que llegué al departamento, siento que alguien me observa.",
+            "nextId": "val_reveal_1"
+        },
+        {
+            "id": "val_reveal_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pensé que eran alucinaciones del jet lag... pero no.",
+            "nextId": "val_reveal_2"
+        },
+        {
+            "id": "val_reveal_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ese tipo... la sombra que vi fuera de la tienda... {{name}}, creo que me siguió hasta aquí.",
+            "nextId": "val_stalker_photo_intro"
+        },
+        {
+            "id": "val_stalker_photo_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Logré tomar esta foto desde mi ventana hace un momento. Mira.",
+            "nextId": "val_stalker_photo"
+        },
+        {
+            "id": "val_stalker_photo",
+            "sender": "valeria",
+            "type": "image",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/3-message.webp",
+            "nextId": "choice_stalker_react"
+        },
+        {
+            "id": "choice_stalker_react",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Val... eso da mucho miedo. ¡Llama a la policía ya!",
+                    "nextId": "val_stalker_scared",
+                    "impact": {
+                        "valeria_affection": 10,
+                        "mistery_level": 15
+                    }
+                },
+                {
+                    "text": "¿Estás segura que es alguien? No se ve muy claro...",
+                    "nextId": "val_stalker_doubt",
+                    "impact": {
+                        "valeria_affection": -5,
+                        "mistery_level": 5
+                    }
+                },
+                {
+                    "text": "Tal vez es solo un vecino, no seas paranoica.",
+                    "nextId": "val_behavior_check_4_start",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_stalker_scared",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡NO PUEDO! Mis padres no saben que volví... si llamo a la policía habrá un escándalo.",
+            "nextId": "val_stalker_tension"
+        },
+        {
+            "id": "val_stalker_doubt",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡YO SÉ LO QUE VI! No estoy loca, {{name}}.",
+            "nextId": "val_stalker_tension"
+        },
+        {
+            "id": "val_behavior_check_4_start",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me estás llamando loca cuando estoy muerta de miedo. No puedo creerlo.",
+            "nextId": "val_check_affection_stalker"
+        },
+        {
+            "id": "val_check_affection_stalker",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sabes qué... no sé por qué te busqué. Pensé que eras diferente.",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": "<=",
+                    "value": 0,
+                    "nextId": "val_block_ending_stalker"
+                }
+            ],
+            "nextId": "val_anger_cool_down"
+        },
+        {
+            "id": "val_anger_cool_down",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Olvídalo. Debería dejar de escribirte y resolver esto yo sola. No sé qué esperaba de ti.",
+            "nextId": "val_stalker_tension"
+        },
+        {
+            "id": "val_stalker_tension",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Espera.",
+            "delay": 2000,
+            "nextId": "val_stalker_pause_1"
+        },
+        {
+            "id": "val_stalker_pause_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "...",
+            "delay": 3000,
+            "nextId": "val_stalker_noise"
+        },
+        {
+            "id": "val_stalker_noise",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Acabo de escuchar la puerta del pasillo.",
+            "nextId": "val_stalker_knocking_intro"
+        },
+        {
+            "id": "val_stalker_knocking_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "{{name}}... alguien está tocando.",
+            "nextId": "val_knocking_audio"
+        },
+        {
+            "id": "val_knocking_audio",
+            "sender": "valeria",
+            "type": "audio",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/effects/hungry/1-stalker-shadow.mp3",
+            "delay": 15000,
+            "nextId": "val_final_panic"
+        },
+        {
+            "id": "val_final_panic",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No voy a abrir. Tengo mucho miedo. 😭",
+            "nextId": "val_final_typing_fake"
+        },
+        {
+            "id": "val_final_typing_fake",
+            "sender": "valeria",
+            "type": "typing_fake",
+            "content": null,
+            "typingCycles": 5,
+            "nextId": "val_disconnect"
+        },
+        {
+            "id": "val_disconnect",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria se ha desconectado.",
+            "actions": [
+                {
+                    "type": "setNPCStatus",
+                    "value": false
+                }
+            ],
+            "delay": 3000,
+            "nextId": "val_final_system"
+        },
+        {
+            "id": "val_final_system",
+            "sender": "system",
+            "type": "text",
+            "content": "Algo terrible acaba de suceder. Tu teléfono no recibe señales de ella. El silencio es ensordecedor.",
+            "delay": 2500,
+            "nextId": "part2_end"
+        },
+        {
+            "id": "part2_end",
+            "sender": "system",
+            "type": "part_end",
+            "content": "Fin de la Parte 2",
+            "nextPart": 3
+        },
+        {
+            "id": "val_block_ending_stalker",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Eres un asco de persona, {{name}}. Estoy muerta de miedo y tú solo te burlas. No me hables nunca más en tu puta vida. Adiós.",
+            "nextId": "val_block_system_stalker"
+        },
+        {
+            "id": "val_block_system_stalker",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria te ha bloqueado en medio de su desesperación. Nunca sabrás qué le pasó.",
+            "actions": [
+                {
+                    "type": "setNPCStatus",
+                    "value": false
+                },
+                {
+                    "type": "setBlocked",
+                    "value": true
+                }
+            ],
+            "delay": 3000,
+            "nextId": null
+        }
+    ]
+}

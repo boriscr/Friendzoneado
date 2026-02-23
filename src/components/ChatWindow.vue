@@ -5,17 +5,18 @@
       <div class="header-left">
         <div class="avatar">
           <span class="avatar-letter">
-            <img class="avatar-img"
+            <img v-if="!store.isBlocked" class="avatar-img"
               src="https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp" alt="">
+            <span v-else class="avatar-placeholder">V</span>
           </span>
-          <span class="status-dot" :class="{ online: !isChapterEnded }"></span>
+          <span class="status-dot" :class="{ online: store.isNPCConnected && !isChapterEnded }"></span>
         </div>
         <div class="header-info">
           <h2 class="contact-name">Valeria</h2>
           <p class="contact-status">
             <template v-if="store.isRecording">grabando audio…</template>
             <template v-else-if="store.isTyping">escribiendo…</template>
-            <template v-else-if="isChapterEnded">desconectada</template>
+            <template v-else-if="!store.isNPCConnected || isChapterEnded">desconectada</template>
             <template v-else>en línea</template>
           </p>
         </div>
@@ -49,6 +50,10 @@
 
     <!-- Choice panel -->
     <ChoicePanel v-if="engine.isWaitingForChoice.value" :choices="engine.choices.value" @select="handleChoice" />
+
+    <!-- Part Intro Overlay -->
+    <PartIntro v-if="store.showPartIntro" :chapterNumber="store.currentChapter" :partNumber="store.currentPart"
+      :title="store.currentPartTitle" @start="handlePartStart" />
   </div>
 </template>
 
@@ -56,10 +61,10 @@
 import { ref, onMounted, watch, nextTick } from 'vue'
 import { useGameStore } from '../stores/gameStore'
 import { useDialogEngine } from '../composables/useDialogEngine'
-import chapter1Data from '../data/chapter1.json'
 import MessageBubble from './MessageBubble.vue'
 import TypingIndicator from './TypingIndicator.vue'
 import ChoicePanel from './ChoicePanel.vue'
+import PartIntro from './PartIntro.vue'
 
 const store = useGameStore()
 const engine = useDialogEngine()
@@ -106,6 +111,12 @@ function handleReset() {
   store.resetGame()
 }
 
+// ── Part management ────────────────────────────────
+async function handlePartStart() {
+  isChapterEnded.value = false
+  await engine.startChapter(store.currentChapter, store.currentPart)
+}
+
 // ── Start / Resume ─────────────────────────────────
 onMounted(async () => {
   // Try to load saved progress
@@ -113,12 +124,20 @@ onMounted(async () => {
 
   if (store.chatHistory.length > 0 && store.currentNodeId) {
     // Resume from where we left off
-    await engine.resumeFromNode(chapter1Data, store.currentNodeId)
+    isChapterEnded.value = false
+    await engine.resumeFromNode(store.currentChapter, store.currentPart, store.currentNodeId)
   } else if (store.chatHistory.length === 0) {
-    // Fresh start
-    await engine.startChapter(chapter1Data)
+    // Fresh start: Load metadata so we have the title, then show intro
+    isChapterEnded.value = false
+    await engine.loadPartData(store.currentChapter, store.currentPart)
+    store.showPartIntro = true
   }
-  // else: chatHistory exists but currentNodeId is null → chapter finished, just display history
+  // else: chatHistory exists but currentNodeId is null → chapter finished or between parts
+  else if (store.showPartIntro) {
+    isChapterEnded.value = false
+  } else {
+    isChapterEnded.value = true
+  }
 
   scrollToBottom()
 })

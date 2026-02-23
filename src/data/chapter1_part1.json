@@ -1,0 +1,738 @@
+{
+    "chapter": 1,
+    "part": 1,
+    "title": "El Reencuentro",
+    "characters": {
+        "valeria": {
+            "displayName": "Valeria",
+            "avatar": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp"
+        }
+    },
+    "nodes": [
+        {
+            "id": "start",
+            "sender": "system",
+            "type": "text",
+            "content": "Tienes un nuevo mensaje de un número desconocido…",
+            "delay": 2000,
+            "nextId": "val_01"
+        },
+        {
+            "id": "val_01",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Hola… ¿{{name}}?",
+            "nextId": "val_02"
+        },
+        {
+            "id": "val_02",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Eres tú? 😅 Dime que no cambiaste de número en estos dos años.",
+            "nextId": "choice_initial"
+        },
+        {
+            "id": "choice_initial",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¿Valeria? ¡No puede ser! ¡Qué sorpresa! 😊",
+                    "nextId": "val_greet_warm",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "Perdona, ¿quién eres? No tengo este número guardado.",
+                    "nextId": "val_greet_cold",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "¿Cómo conseguiste mi número? Esto es un poco raro.",
+                    "nextId": "val_greet_suspicious",
+                    "impact": {
+                        "valeria_affection": -10,
+                        "mistery_level": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_greet_warm",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡¡Siii!! Soy yo, Val. 😭",
+            "nextId": "val_greet_warm_2"
+        },
+        {
+            "id": "val_greet_warm_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me daba tanto miedo que me hubieras olvidado o que me dejaras en visto para siempre jaja.",
+            "nextId": "val_memories_intro"
+        },
+        {
+            "id": "val_greet_cold",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ay qué cortante… 🥲",
+            "nextId": "val_greet_cold_2"
+        },
+        {
+            "id": "val_greet_cold_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Soy Valeria. Tu compañera de secundaria, la que te ayudaba a copiar en los exámenes de química. ¿Ya me borraste de tu memoria? 🥺",
+            "nextId": "choice_prank"
+        },
+        {
+            "id": "choice_prank",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Lo siento, Val... de verdad no te recuerdo bien.",
+                    "nextId": "val_prank_serious",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                },
+                {
+                    "text": "¡Es broma! Jajaja, claro que me acuerdo de ti, Val. Imposible olvidarte. 😂",
+                    "nextId": "val_prank_reveal",
+                    "impact": {
+                        "valeria_affection": 15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_prank_reveal",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡¡ESTÚPIDO!! 😂😂😂",
+            "nextId": "val_prank_reveal_2"
+        },
+        {
+            "id": "val_prank_reveal_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Casi me haces llorar, de verdad pensé que habías pasado página por completo. ¡Qué malo eres! jaja",
+            "nextId": "val_memories_intro"
+        },
+        {
+            "id": "val_prank_serious",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Vaya... bueno, supongo que han pasado muchas cosas.",
+            "nextId": "val_prank_serious_2"
+        },
+        {
+            "id": "val_prank_serious_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Tal vez te acuerdes de esto... ¿Te acuerdas de la vez que nos castigaron por 'limpiar' el pizarrón con marcador permanente? 😂",
+            "nextId": "val_memories_intro"
+        },
+        {
+            "id": "val_greet_suspicious",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ehh... hola {{name}}. Tan amable como siempre veo. 😂",
+            "nextId": "val_greet_suspicious_2"
+        },
+        {
+            "id": "val_greet_suspicious_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Lo tenía guardado en un cuaderno viejo de secundaria. Perdón si te molestó, pensé que te gustaría saber de mí.",
+            "nextId": "choice_suspicious_follow"
+        },
+        {
+            "id": "choice_suspicious_follow",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Sigo pensando que es raro que guardes números de hace años.",
+                    "nextId": "val_suspicious_hard",
+                    "impact": {
+                        "valeria_affection": -12
+                    }
+                },
+                {
+                    "text": "Está bien, lo siento. Es solo que no me lo esperaba. ¿Cómo estás?",
+                    "nextId": "val_suspicious_soft",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_suspicious_hard",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bueno, no soy una acosadora, relájate. 🙄",
+            "nextId": "val_suspicious_hard_2"
+        },
+        {
+            "id": "val_suspicious_hard_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Simplemente me quedé pensando en la gente de la escuela y tú eras... bueno, alguien a quien apreciaba. Pero veo que el tiempo te cambió.",
+            "nextId": "val_memories_intro"
+        },
+        {
+            "id": "val_suspicious_soft",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Mucho mejor ahora que sé que no me bloqueaste directamente! jajaja",
+            "nextId": "val_suspicious_soft_2"
+        },
+        {
+            "id": "val_suspicious_soft_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Estoy bien, instalándome de nuevo. He estado viendo recuerdos de esa época...",
+            "nextId": "val_memories_intro"
+        },
+        {
+            "id": "val_memories_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Estaba revisando fotos viejas hoy y me entró mucha nostalgia. 📸",
+            "nextId": "val_memories_1"
+        },
+        {
+            "id": "val_memories_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Te acuerdas de cuando nos escapábamos de educación física para ir a ver las nubes en el techo de la escuela? ☁️",
+            "nextId": "choice_clouds"
+        },
+        {
+            "id": "choice_clouds",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Cómo no recordarlo... el día que casi te caes y te sostuve de la mochila 😂",
+                    "nextId": "val_clouds_positive",
+                    "impact": {
+                        "valeria_affection": 12
+                    }
+                },
+                {
+                    "text": "Sinceramente, me acuerdo más de los regaños que nos daban después.",
+                    "nextId": "val_clouds_neutral",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Qué pérdida de tiempo hacíamos de jóvenes.",
+                    "nextId": "val_clouds_negative_branch",
+                    "impact": {
+                        "valeria_affection": -10
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_clouds_negative_branch",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Vaya... 'pérdida de tiempo'. 😒",
+            "nextId": "val_clouds_negative_2"
+        },
+        {
+            "id": "val_clouds_negative_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pensé que esos momentos eran especiales para ti también. Éramos libres por un rato.",
+            "nextId": "choice_clouds_negative_follow"
+        },
+        {
+            "id": "choice_clouds_negative_follow",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Éramos unos irresponsables, Val. Madura un poco.",
+                    "nextId": "val_clouds_negative_hard",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                },
+                {
+                    "text": "Bueno, tal vez fui un poco duro. Tenían su encanto, supongo.",
+                    "nextId": "val_clouds_negative_soft",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_clouds_negative_hard",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿'Madura'? ¡Vete al carajo! 😂 (Perdón, me salió del alma).",
+            "nextId": "val_clouds_negative_hard_2"
+        },
+        {
+            "id": "val_clouds_negative_hard_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Para ser un 'adulto maduro' eres bastante aburrido ahora. Sigamos con el interrogatorio entonces, si eso te hace sentir más adulto.",
+            "nextId": "val_status_intro"
+        },
+        {
+            "id": "val_clouds_negative_soft",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ves! Sabía que tenías corazón todavía escondido bajo esa capa de seriedad.",
+            "nextId": "val_status_intro"
+        },
+        {
+            "id": "val_clouds_positive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ay no me lo recuerdes! Mi pobre mochila de gatito terminó toda estirada. 🐱",
+            "nextId": "val_clouds_positive_2"
+        },
+        {
+            "id": "val_clouds_positive_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero me sentía tan segura contigo ahí. Eras mi héroe personal... aunque fueras un poco torpe jaja.",
+            "nextId": "val_status_intro"
+        },
+        {
+            "id": "val_clouds_neutral",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jaja, pero valía la pena, ¿no? Eras el único que se atrevía a seguirme mis locuras.",
+            "nextId": "val_status_intro"
+        },
+        {
+            "id": "val_status_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero bueno... cuéntame de ti. ¿Qué ha sido de tu vida de adulto?",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_status_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Ya eres un millonario exitoso o sigues siendo el mismo vago que dormía en clase de historia? 😂",
+            "nextId": "choice_life"
+        },
+        {
+            "id": "choice_life",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Trabajo un montón, pero millonario lo que es millonario... todavía no 😂",
+                    "nextId": "val_life_work",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Sigo durmiendo mucho, pero ahora me pagan por hacer otras cosas.",
+                    "nextId": "val_life_vago",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                },
+                {
+                    "text": "No te incumbe mucho qué hago ahora, ¿no crees?",
+                    "nextId": "val_behavior_check_2",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_life_work",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jajaja bueno, al menos ya no te castigan por llegar tarde... ¿o sí? 😏",
+            "nextId": "val_dating_intro"
+        },
+        {
+            "id": "val_life_vago",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Lo sabía! El alma de flojo nunca se quita. 😂",
+            "nextId": "val_life_vago_2"
+        },
+        {
+            "id": "val_life_vago_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me alegra que al menos lograste que alguien te pagara por algo divertido.",
+            "nextId": "val_dating_intro"
+        },
+        {
+            "id": "val_dating_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y dime... algo más importante... 🤔",
+            "nextId": "val_dating_1"
+        },
+        {
+            "id": "val_dating_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Ya tienes alguna pobre chica sufriendo por ti o sigues siendo el joven más casto de la ciudad? 😂",
+            "nextId": "choice_dating"
+        },
+        {
+            "id": "choice_dating",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Estoy soltero... esperando a que alguien me aguante jaja.",
+                    "nextId": "val_dating_single",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "He tenido mis historias... no soy tan 'santo' como creías. 😉",
+                    "nextId": "val_dating_stories",
+                    "impact": {
+                        "valeria_affection": 5,
+                        "mistery_level": 5
+                    }
+                },
+                {
+                    "text": "¿Por qué tanto interés en mi vida amorosa, Val?",
+                    "nextId": "val_dating_curious",
+                    "impact": {
+                        "valeria_affection": 7
+                    }
+                },
+                {
+                    "text": "¿Sigues siendo virgen tú también o qué?",
+                    "nextId": "val_behavior_check_acosador",
+                    "impact": {
+                        "valeria_affection": -30
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_dating_single",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡No te lo creo! 😂 Con lo 'caballeroso' que eras conmigo.",
+            "nextId": "val_dating_single_2"
+        },
+        {
+            "id": "val_dating_single_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bueno, me das esperanzas de que no soy la única soltera en este mundo cruel. 😏",
+            "nextId": "val_embarrassing_memory"
+        },
+        {
+            "id": "val_dating_stories",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ooooh! Mira quién salió picante. 😂",
+            "nextId": "val_dating_stories_2"
+        },
+        {
+            "id": "val_dating_stories_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me lo imaginaba... siempre tuviste ese aire de 'chico bueno' pero en el fondo eras un peligro. jaja",
+            "nextId": "val_embarrassing_memory"
+        },
+        {
+            "id": "val_dating_curious",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pues... curiosidad de amiga, ¿no? 😇",
+            "nextId": "val_dating_curious_2"
+        },
+        {
+            "id": "val_dating_curious_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Quiero saber si el chico que me prestaba su suéter cuando tenía frío ya se convirtió en un rompecorazones.",
+            "nextId": "val_embarrassing_memory"
+        },
+        {
+            "id": "val_embarrassing_memory",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Oye, ¿te acuerdas de la fiesta de graduación? 😂",
+            "nextId": "val_embarrassing_1"
+        },
+        {
+            "id": "val_embarrassing_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Cuando intentaste bailar conmigo y terminaste derramando el ponche sobre el vestido de la directora... ¡Dios mío! ¡Fue épico! 😂😂😂",
+            "nextId": "choice_embarrassed"
+        },
+        {
+            "id": "choice_embarrassed",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¡CALLATE! 🙈 Fue el momento más humillante de mi vida.",
+                    "nextId": "val_embarrassed_positive",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "La culpa fue tuya por hacerme dar esa vuelta tan rápido jaja.",
+                    "nextId": "val_embarrassed_jokey",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                },
+                {
+                    "text": "No me pareció tan gracioso entonces.",
+                    "nextId": "val_embarrassed_cold",
+                    "impact": {
+                        "valeria_affection": -5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_embarrassed_positive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jajaja pobre {{name}}... tenías la cara más roja que un tomate. 🍅",
+            "nextId": "val_embarrassed_positive_2"
+        },
+        {
+            "id": "val_embarrassed_positive_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero te veías tan tierno tratando de limpiarla con una servilleta de papel... 😂",
+            "nextId": "val_sentimental_break"
+        },
+        {
+            "id": "val_embarrassed_jokey",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿¿MI CULPA?? 😂 ¡Si tú parecías un trompo sin control!",
+            "nextId": "val_sentimental_break"
+        },
+        {
+            "id": "val_embarrassed_cold",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bueno, bueno... ya no te enojes. Sabes que me encanta molestarte.",
+            "nextId": "val_sentimental_break"
+        },
+        {
+            "id": "val_sentimental_break",
+            "sender": "valeria",
+            "type": "text",
+            "content": "La verdad... extrañaba mucho nuestras pláticas.",
+            "nextId": "val_sentimental_1"
+        },
+        {
+            "id": "val_sentimental_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Nadie me hace reír (y desesperar) como tú. 💖",
+            "nextId": "val_photo_intro_2"
+        },
+        {
+            "id": "val_photo_intro_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Regresé al país hace unos días y me sentía un poco sola en este departamento nuevo.",
+            "nextId": "val_photo_intro_3"
+        },
+        {
+            "id": "val_photo_intro_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mira qué tal me veo ahora, ¿he mejorado con los años o sigo siendo la misma 'niña rara'?",
+            "nextId": "val_photo_send"
+        },
+        {
+            "id": "val_photo_send",
+            "sender": "valeria",
+            "type": "image",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/1-profile-valeria.webp",
+            "nextId": "choice_photo_val"
+        },
+        {
+            "id": "choice_photo_val",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¡Val! Estás increíble... no tengo palabras 😍",
+                    "nextId": "val_photo_hot",
+                    "impact": {
+                        "valeria_affection": 15
+                    }
+                },
+                {
+                    "text": "Te ves muy bien, Val. Te sentó bien el viaje. 😊",
+                    "nextId": "val_photo_kind",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "Pues... normal, supongo.",
+                    "nextId": "val_behavior_check_3",
+                    "impact": {
+                        "valeria_affection": -10
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_photo_hot",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ay... me vas a sonrojar a mí ahora. 😳",
+            "nextId": "val_photo_hot_2"
+        },
+        {
+            "id": "val_photo_hot_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Gracias, {{name}}. Sabía que podía contar contigo para subirme el ánimo.",
+            "nextId": "val_serious_intro"
+        },
+        {
+            "id": "val_photo_kind",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Gracias, Val. 😊 La verdad es que me siento mucho más cómoda ahora que antes.",
+            "nextId": "val_mood_check"
+        },
+        {
+            "id": "val_mood_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "La verdad es que estás un poco raro/a hoy... No pareces el mismo que conocí.",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": "<",
+                    "value": 30,
+                    "nextId": "val_serious_intro"
+                }
+            ],
+            "nextId": "val_serious_intro"
+        },
+        {
+            "id": "val_serious_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "{{name}}... hay algo que no te dije.",
+            "nextId": "val_serious_1"
+        },
+        {
+            "id": "val_serious_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No te escribí solo para reírnos de la secundaria. 😔",
+            "nextId": "part1_end"
+        },
+        {
+            "id": "part1_end",
+            "sender": "system",
+            "type": "part_end",
+            "content": "Fin de la Parte 1",
+            "nextPart": 2
+        },
+        {
+            "id": "val_behavior_check_acosador",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Pero qué te pasa! ¡Eso es una falta de respeto total! �",
+            "nextId": "val_check_affection"
+        },
+        {
+            "id": "val_behavior_check_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Perdón por preguntar, SEÑOR SECRETO. 🙄 qué grosero.",
+            "nextId": "val_check_affection"
+        },
+        {
+            "id": "val_behavior_check_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿'Normal'? Gracias por el 'halago' tan entusiasta. Estás insoportable hoy.",
+            "nextId": "val_check_affection"
+        },
+        {
+            "id": "val_check_affection",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sabes qué... no sé por qué te busqué. Pensé que seguías siendo la persona que conocí.",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": "<=",
+                    "value": 0,
+                    "nextId": "val_block_ending"
+                }
+            ],
+            "nextId": "val_serious_intro"
+        },
+        {
+            "id": "val_block_ending",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Eres un imbécil, {{name}}. No sé qué me pasó por la cabeza para escribirte. Olvida que existo y lárgate a la mierda. Adiós.",
+            "nextId": "val_block_system"
+        },
+        {
+            "id": "val_block_system",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria te ha bloqueado. Has arruinado tu única oportunidad de reconectar con tu pasado.",
+            "actions": [
+                {
+                    "type": "setNPCStatus",
+                    "value": false
+                },
+                {
+                    "type": "setBlocked",
+                    "value": true
+                }
+            ],
+            "delay": 3000,
+            "nextId": null
+        }
+    ]
+}

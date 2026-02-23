@@ -33,7 +33,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -89,4 +90,18 @@ html, body {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #54656f;
+  color: #dfe5e7;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50%;
+  text-transform: uppercase;
 }

@@ -6,10 +6,14 @@ export const useGameStore = defineStore('game', () => {
     // ── Player ──────────────────────────────────────────
     const playerName = ref('')
     const gameStarted = ref(false)
+    const currentChapter = ref(1)
+    const currentPart = ref(1)
+    const currentPartTitle = ref('')
+    const showPartIntro = ref(false)
 
     // ── Narrative state variables ───────────────────────
     const gameState = reactive({
-        valeria_affection: 0,
+        valeria_affection: 50,
         mistery_level: 0
     })
 
@@ -20,6 +24,8 @@ export const useGameStore = defineStore('game', () => {
     const isReading = ref(false)
     const isRecording = ref(false)
     const typingSender = ref('')
+    const isNPCConnected = ref(true)
+    const isBlocked = ref(false)
 
     // ── Actions: player name ────────────────────────────
     async function setPlayerName(name) {
@@ -101,7 +107,10 @@ export const useGameStore = defineStore('game', () => {
     function resetGame() {
         playerName.value = ''
         gameStarted.value = false
-        gameState.valeria_affection = 0
+        currentChapter.value = 1
+        currentPart.value = 1
+        showPartIntro.value = false
+        gameState.valeria_affection = 50
         gameState.mistery_level = 0
         chatHistory.value = []
         currentNodeId.value = null
@@ -109,6 +118,8 @@ export const useGameStore = defineStore('game', () => {
         isReading.value = false
         isRecording.value = false
         typingSender.value = ''
+        isNPCConnected.value = true
+        isBlocked.value = false
         Preferences.remove({ key: 'gameProgress' })
         Preferences.remove({ key: 'playerName' })
     }
@@ -118,12 +129,18 @@ export const useGameStore = defineStore('game', () => {
         playerName,
         gameStarted,
         gameState,
+        currentChapter,
+        currentPart,
+        currentPartTitle,
+        showPartIntro,
         chatHistory,
         currentNodeId,
         isTyping,
         isReading,
         isRecording,
         typingSender,
+        isNPCConnected,
+        isBlocked,
         // actions
         setPlayerName,
         loadPlayerName,

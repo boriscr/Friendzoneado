@@ -50,17 +50,33 @@ export function useDialogEngine() {
         for (const action of actions) {
             if (action.type === 'set') {
                 store.updateState(action.variable, action.value)
+            } else if (action.type === 'setNPCStatus') {
+                store.isNPCConnected = action.value
+            } else if (action.type === 'setBlocked') {
+                store.isBlocked = action.value
             }
         }
     }
 
     // ── Core engine ──────────────────────────────────────
 
+    async function loadPartData(chapter, part) {
+        try {
+            const module = await import(`../data/chapter${chapter}_part${part}.json`)
+            loadChapter(module.default)
+        } catch (e) {
+            console.error(`Failed to load data for chapter ${chapter} part ${part}:`, e)
+        }
+    }
+
     function loadChapter(chapterData) {
         nodes.value = chapterData.nodes
         nodeMap.value = {}
         for (const node of chapterData.nodes) {
             nodeMap.value[node.id] = node
+        }
+        if (chapterData.title) {
+            store.currentPartTitle = chapterData.title
         }
     }
 
@@ -75,6 +91,20 @@ export function useDialogEngine() {
 
         isProcessing.value = true
         store.currentNodeId = nodeId
+
+        // ── Part end: transition to next part ──────────
+        if (node.type === 'part_end') {
+            isProcessing.value = false
+            store.currentNodeId = null // Clear for next part
+            if (node.nextPart) {
+                store.currentPart = node.nextPart
+                // Pre-load the next part's data so the Intro screen shows the correct title
+                await loadPartData(store.currentChapter, node.nextPart)
+                store.showPartIntro = true
+            }
+            await store.saveProgress()
+            return
+        }
 
         // ── Choice node: stop and wait for player ────────
         if (node.type === 'choice') {
@@ -256,15 +286,29 @@ export function useDialogEngine() {
         }
     }
 
-    async function startChapter(chapterData) {
-        loadChapter(chapterData)
-        await processNode('start')
+    async function startChapter(chapter, part = 1) {
+        try {
+            const module = await import(`../data/chapter${chapter}_part${part}.json`)
+            loadChapter(module.default)
+            store.currentChapter = chapter
+            store.currentPart = part
+            await processNode('start')
+        } catch (e) {
+            console.error(`Failed to load chapter ${chapter} part ${part}:`, e)
+        }
     }
 
-    async function resumeFromNode(chapterData, nodeId) {
-        loadChapter(chapterData)
-        if (nodeId) {
-            await processNode(nodeId)
+    async function resumeFromNode(chapter, part, nodeId) {
+        try {
+            const module = await import(`../data/chapter${chapter}_part${part}.json`)
+            loadChapter(module.default)
+            store.currentChapter = chapter
+            store.currentPart = part
+            if (nodeId) {
+                await processNode(nodeId)
+            }
+        } catch (e) {
+            console.error(`Failed to resume chapter ${chapter} part ${part}:`, e)
         }
     }
 
@@ -276,6 +320,8 @@ export function useDialogEngine() {
     return {
         startChapter,
         resumeFromNode,
+        loadPartData,
+        loadChapter, // Exported to allow manual loading if needed
         selectChoice,
         isWaitingForChoice,
         choices,
