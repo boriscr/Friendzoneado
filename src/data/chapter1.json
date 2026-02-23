@@ -1,0 +1,288 @@
+{
+    "chapter": 1,
+    "title": "Un mensaje inesperado",
+    "characters": {
+        "valeria": {
+            "displayName": "Valeria",
+            "avatar": null
+        }
+    },
+    "nodes": [
+        {
+            "id": "start",
+            "sender": "system",
+            "type": "text",
+            "content": "Tienes un nuevo mensaje de un número desconocido…",
+            "delay": 1500,
+            "nextId": "val_01"
+        },
+        {
+            "id": "val_01",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Hola… ¿{{name}}? ¿Eres tú? 😅",
+            "delay": 2000,
+            "nextId": "val_02"
+        },
+        {
+            "id": "val_02",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Soy Valeria, no sé si te acuerdas de mí… fuimos compañeros en la secundaria.",
+            "delay": 2500,
+            "nextId": "choice_01"
+        },
+        {
+            "id": "choice_01",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "delay": 0,
+            "choices": [
+                {
+                    "text": "¡Valeria! ¡Claro que me acuerdo! ¿Cómo estás? 😊",
+                    "nextId": "val_03_positive",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "¿Valeria? Mmm… no estoy seguro de quién eres.",
+                    "nextId": "val_03_neutral",
+                    "impact": {
+                        "valeria_affection": -5
+                    }
+                },
+                {
+                    "text": "¿Quién te dio mi número? 🤨",
+                    "nextId": "val_03_negative",
+                    "impact": {
+                        "valeria_affection": -10,
+                        "mistery_level": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_03_positive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ay, qué alivio! 😂 Pensé que me ibas a dejar en visto.",
+            "delay": 2000,
+            "nextId": "val_04"
+        },
+        {
+            "id": "val_03_neutral",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jaja, bueno… éramos bastante diferentes en esa época. Pero sí, soy yo.",
+            "delay": 2500,
+            "nextId": "val_04"
+        },
+        {
+            "id": "val_03_negative",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Tranquilo… me lo dio una amiga en común. Sé que es raro que te escriba así de la nada.",
+            "delay": 3000,
+            "nextId": "val_04"
+        },
+        {
+            "id": "val_04",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mira, te voy a ser sincera… necesito hablar con alguien. Y por alguna razón pensé en ti.",
+            "delay": 3000,
+            "nextId": "val_05"
+        },
+        {
+            "id": "val_05",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Te mando una foto para que me reconozcas 😜",
+            "delay": 2000,
+            "nextId": "val_06_photo"
+        },
+        {
+            "id": "val_06_photo",
+            "sender": "valeria",
+            "type": "image",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/1-profile-valeria.webp",
+            "delay": 3000,
+            "nextId": "choice_02"
+        },
+        {
+            "id": "choice_02",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "delay": 0,
+            "choices": [
+                {
+                    "text": "¡Wow, estás muy cambiada! Te ves increíble 😍",
+                    "nextId": "val_07_flirty",
+                    "impact": {
+                        "valeria_affection": 15
+                    }
+                },
+                {
+                    "text": "¡Ahora sí te reconozco! Sigues igual 😄",
+                    "nextId": "val_07_friendly",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Ok, ¿y qué necesitas hablar?",
+                    "nextId": "val_07_direct",
+                    "impact": {
+                        "valeria_affection": -5,
+                        "mistery_level": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_07_flirty",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jaja, ay, ¡qué cosas dices! 😳 Gracias…",
+            "delay": 2000,
+            "nextId": "val_08"
+        },
+        {
+            "id": "val_07_friendly",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jaja, ¿igual? No sé si eso es bueno o malo 😂",
+            "delay": 2000,
+            "nextId": "val_08"
+        },
+        {
+            "id": "val_07_direct",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sí, tienes razón. Perdona, es que no sé ni cómo empezar…",
+            "delay": 2500,
+            "nextId": "val_08"
+        },
+        {
+            "id": "val_08",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mira… mejor te mando un audio. Es más fácil así.",
+            "delay": 2000,
+            "nextId": "val_09_audio"
+        },
+        {
+            "id": "val_09_audio",
+            "sender": "valeria",
+            "type": "audio",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/chapter_1/1-valeria.mp3",
+            "delay": 4000,
+            "nextId": "val_10"
+        },
+        {
+            "id": "val_10",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Perdón si se escuchó raro… es que estoy un poco nerviosa.",
+            "delay": 2500,
+            "nextId": "choice_03"
+        },
+        {
+            "id": "choice_03",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "delay": 0,
+            "choices": [
+                {
+                    "text": "Tranquila, puedes contarme lo que sea. Estoy aquí para ti. ❤️",
+                    "nextId": "val_11_supportive",
+                    "impact": {
+                        "valeria_affection": 10,
+                        "mistery_level": 5
+                    }
+                },
+                {
+                    "text": "¿Estás bien? ¿Estás en peligro? 😰",
+                    "nextId": "val_11_worried",
+                    "impact": {
+                        "valeria_affection": 5,
+                        "mistery_level": 15
+                    }
+                },
+                {
+                    "text": "Mmm, suena serio. ¿No deberías hablar con alguien más cercano?",
+                    "nextId": "val_11_distant",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_11_supportive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Gracias, {{name}}… de verdad no sabes cuánto significa eso. 🥺",
+            "delay": 2000,
+            "nextId": "val_12_cliffhanger"
+        },
+        {
+            "id": "val_11_worried",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No, no estoy en peligro… bueno, no exactamente. Es complicado.",
+            "delay": 2500,
+            "nextId": "val_12_cliffhanger"
+        },
+        {
+            "id": "val_11_distant",
+            "sender": "valeria",
+            "type": "text",
+            "content": "…Sí, probablemente tengas razón. Perdona la molestia.",
+            "delay": 3000,
+            "nextId": "val_12_distant_end"
+        },
+        {
+            "id": "val_12_cliffhanger",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Te voy a contar todo, pero no ahora. ¿Puedo escribirte mañana? Es que… hay alguien cerca.",
+            "delay": 3500,
+            "nextId": "val_13_end",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "mistery_level",
+                    "value": 25
+                }
+            ]
+        },
+        {
+            "id": "val_12_distant_end",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria se desconectó. Algo no se siente bien… ¿debiste haber sido más amable?",
+            "delay": 2000,
+            "nextId": null,
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "mistery_level",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "id": "val_13_end",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria se desconectó. La curiosidad te consume. ¿Qué está pasando?",
+            "delay": 2000,
+            "nextId": null
+        }
+    ]
+}
