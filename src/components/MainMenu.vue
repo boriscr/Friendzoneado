@@ -33,19 +33,39 @@
         </div>
 
         <div class="menu-footer">
-            <p>© 2026 Ghost Interactive</p>
+            <p>© 2026 Kredensir Games</p>
         </div>
+
+        <!-- Confirmation Modal -->
+        <Transition name="scale">
+            <div v-if="showConfirmModal" class="modal-overlay" @click.self="showConfirmModal = false">
+                <div class="confirm-modal">
+                    <div class="modal-glow"></div>
+                    <h2 class="modal-title">¿Deseas continuar?</h2>
+                    <p class="modal-text">Ya tienes una partida guardada en este capítulo. ¿Quieres retomar tu historia
+                        o empezar desde el principio?</p>
+
+                    <div class="modal-buttons">
+                        <button @click="confirmContinue" class="btn-primary">Continuar Historia</button>
+                        <button @click="confirmRestart" class="btn-outline-danger">Reiniciar Capítulo</button>
+                        <button @click="showConfirmModal = false" class="btn-ghost">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </Transition>
     </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useGameStore } from '../stores/gameStore'
 import { playBackgroundMusic, stopBackgroundMusic } from '../utils/sounds'
 import { App } from '@capacitor/app'
 import ChapterCard from './ChapterCard.vue'
 
 const store = useGameStore()
+const showConfirmModal = ref(false)
+const pendingChapterId = ref(null)
 
 onMounted(async () => {
     await store.checkSave()
@@ -61,12 +81,35 @@ const handleContinue = () => {
 }
 
 const handleSelectChapter = (id) => {
-    store.selectChapter(id)
+    if (store.hasSave) {
+        pendingChapterId.value = id
+        showConfirmModal.value = true
+    } else {
+        store.selectChapter(id)
+    }
+}
+
+const confirmContinue = () => {
+    showConfirmModal.value = false
+    store.continueGame()
+}
+
+const confirmRestart = () => {
+    showConfirmModal.value = false
+    if (pendingChapterId.value !== null) {
+        store.selectChapter(pendingChapterId.value)
+
+        // If we already have a player name, trigger the engine immediately
+        if (store.playerName) {
+            const engine = useDialogEngine()
+            engine.startChapter(store.currentChapter, store.currentPart)
+        }
+    }
 }
 
 const handleDeleteData = async () => {
     if (confirm('¿Estás seguro de que quieres borrar todos los datos? Esta acción no se puede deshacer.')) {
-        store.resetGame()
+        store.resetGame(false)
         await store.checkSave()
     }
 }
@@ -269,5 +312,106 @@ const handleExit = async () => {
     100% {
         transform: translate(0);
     }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.confirm-modal {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(32, 44, 51, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modal-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), transparent 60%, rgba(168, 85, 247, 0.2));
+    z-index: -1;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: #fff;
+}
+
+.modal-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btn-primary {
+    padding: 1rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6c5ce7, #a855f7);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-outline-danger {
+    padding: 1rem;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 14px;
+    background: rgba(255, 68, 68, 0.05);
+    color: #ff4d4d;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* Transitions */
+.scale-enter-active,
+.scale-leave-active {
+    transition: all 0.3s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
 }
 </style>

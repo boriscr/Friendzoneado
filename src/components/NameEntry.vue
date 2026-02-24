@@ -12,7 +12,7 @@
             <input ref="nameInput" v-model="name" type="text" placeholder="Escribe tu nombre..." maxlength="20"
               autocomplete="off" class="name-input" />
           </div>
-          <button type="submit" class="start-btn" :disabled="!name.trim()">
+          <button type="submit" class="start-btn" :disabled="!name.trim()" @click="handleSubmit">
             Comenzar
             <span class="btn-arrow">→</span>
           </button>
@@ -28,7 +28,10 @@
 import { ref, onMounted } from 'vue'
 import { useGameStore } from '../stores/gameStore'
 
+import { useDialogEngine } from '../composables/useDialogEngine'
+
 const store = useGameStore()
+const engine = useDialogEngine()
 const name = ref('')
 const nameInput = ref(null)
 
@@ -40,12 +43,24 @@ onMounted(() => {
 })
 
 async function handleSubmit() {
-  if (!name.value.trim()) return
+  const finalName = name.value.trim()
+  if (!finalName) return
+
   try {
-    await store.setPlayerName(name.value.trim())
-    store.currentView = 'chat'
+    // 1. Update state immediately
+    store.playerName = finalName
+    store.gameStarted = true
+    store.currentView = 'chatList'
+
+    // 2. Persist in background
+    store.setPlayerName(finalName)
+    store.saveProgress()
+
+    // 3. Trigger initial message so it's visible in ChatList
+    // We don't await this so the transition remains instant
+    engine.startChapter(store.currentChapter, store.currentPart)
   } catch (e) {
-    console.warn('Could not save player name:', e)
+    console.warn('Persistence error:', e)
   }
 }
 </script>

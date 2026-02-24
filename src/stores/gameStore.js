@@ -101,7 +101,10 @@ export const useGameStore = defineStore('game', () => {
             gameState: { ...gameState },
             chatHistory: chatHistory.value,
             currentNodeId: currentNodeId.value,
-            gameStarted: gameStarted.value
+            gameStarted: gameStarted.value,
+            currentView: currentView.value,
+            currentChapter: currentChapter.value,
+            currentPart: currentPart.value
         }
         await Preferences.set({ key: 'gameProgress', value: JSON.stringify(data) })
     }
@@ -115,7 +118,10 @@ export const useGameStore = defineStore('game', () => {
                 Object.assign(gameState, data.gameState)
                 chatHistory.value = data.chatHistory || []
                 currentNodeId.value = data.currentNodeId || null
-                // safety: don't overwrite true with false from old progress
+                currentView.value = data.currentView || 'menu'
+                currentChapter.value = data.currentChapter || 1
+                currentPart.value = data.currentPart || 1
+
                 if (data.gameStarted) {
                     gameStarted.value = true
                 }
@@ -131,8 +137,11 @@ export const useGameStore = defineStore('game', () => {
         hasSave.value = !!progress || !!name
     }
 
-    function resetGame() {
-        playerName.value = ''
+    function resetGame(keepName = true) {
+        if (!keepName) {
+            playerName.value = ''
+            Preferences.remove({ key: 'playerName' })
+        }
         gameStarted.value = false
         currentChapter.value = 1
         currentPart.value = 1
@@ -149,7 +158,6 @@ export const useGameStore = defineStore('game', () => {
         isNPCConnected.value = true
         isBlocked.value = false
         Preferences.remove({ key: 'gameProgress' })
-        Preferences.remove({ key: 'playerName' })
     }
 
     function startNewGame() {
@@ -159,7 +167,17 @@ export const useGameStore = defineStore('game', () => {
 
     async function continueGame() {
         await loadProgress()
-        currentView.value = 'chat'
+
+        // Fallback: If after loading we are still on 'menu', force transition to chatList or chat
+        if (currentView.value === 'menu') {
+            if (chatHistory.value.length > 0) {
+                currentView.value = 'chatList'
+            } else if (gameStarted.value) {
+                currentView.value = 'chatList'
+            } else {
+                currentView.value = 'nameEntry'
+            }
+        }
     }
 
     function selectChapter(id) {
@@ -168,7 +186,13 @@ export const useGameStore = defineStore('game', () => {
             resetGame()
             currentChapter.value = id
             currentPart.value = 1
-            currentView.value = 'nameEntry'
+
+            // If we already have a player name, we can jump to chatList
+            if (playerName.value) {
+                currentView.value = 'chatList'
+            } else {
+                currentView.value = 'nameEntry'
+            }
         }
     }
 

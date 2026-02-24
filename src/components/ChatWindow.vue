@@ -3,6 +3,9 @@
     <!-- Header -->
     <header class="chat-header">
       <div class="header-left">
+        <button class="back-btn" @click="handleBack">
+          <span class="back-icon">←</span>
+        </button>
         <div class="avatar">
           <span class="avatar-letter">
             <img v-if="!store.isBlocked" class="avatar-img"
@@ -106,6 +109,12 @@ async function handleChoice(index) {
   scrollToBottom()
 }
 
+// ── Navigation ─────────────────────────────────────
+function handleBack() {
+  store.currentView = 'chatList'
+  store.saveProgress()
+}
+
 // ── Reset ──────────────────────────────────────────
 function handleReset() {
   store.resetGame()
@@ -175,7 +184,20 @@ onMounted(() => {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #8696a0;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
 }
 
 .avatar {
