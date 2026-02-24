@@ -1,0 +1,52 @@
+{
+    "chapter": 0,
+    "part": "global",
+    "title": "Sistema Global",
+    "nodes": [
+        {
+            "id": "val_block_anytime",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sabes qué... ya tuve suficiente de tu actitud, {{name}}.",
+            "nextId": "val_block_anytime_2"
+        },
+        {
+            "id": "val_block_anytime_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pensé que después de dos años habrías madurado, pero veo que sigues siendo igual de maleducado.",
+            "nextId": "val_block_anytime_3"
+        },
+        {
+            "id": "val_block_anytime_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No me vuelvas a escribir. Adiós.",
+            "actions": [
+                {
+                    "type": "setNPCStatus",
+                    "value": false
+                },
+                {
+                    "type": "setBlocked",
+                    "value": true
+                }
+            ],
+            "nextId": "val_block_anytime_system"
+        },
+        {
+            "id": "val_block_anytime_system",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria te ha bloqueado por tu mal comportamiento extremo. Has arruinado permanentemente tu relación con ella.",
+            "actions": [
+                {
+                    "type": "gameOver",
+                    "message": "Valeria te ha bloqueado por ser un maleducado. El juego ha terminado."
+                }
+            ],
+            "delay": 3000,
+            "nextId": null
+        }
+    ]
+}

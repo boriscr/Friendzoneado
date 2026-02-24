@@ -50,6 +50,8 @@ export function useDialogEngine() {
                 store.isNPCConnected = action.value
             } else if (action.type === 'setBlocked') {
                 store.isBlocked = action.value
+            } else if (action.type === 'gameOver') {
+                store.triggerGameOver(action.message)
             }
         }
     }
@@ -62,6 +64,16 @@ export function useDialogEngine() {
             loadChapter(module.default)
         } catch (e) {
             console.error(`Failed to load data for chapter ${chapter} part ${part}:`, e)
+        }
+    }
+
+    async function loadGlobalDialogue(nodeId) {
+        try {
+            const module = await import('../data/global_dialogue.json')
+            loadChapter(module.default)
+            await processNode(nodeId, true)
+        } catch (e) {
+            console.error('Failed to load global dialogue:', e)
         }
     }
 
@@ -234,6 +246,13 @@ export function useDialogEngine() {
 
         // Apply stat impacts
         store.applyImpact(choice.impact)
+
+        // Check for global interrupts (e.g. affection <= 0)
+        if (store.gameState.valeria_affection <= 0) {
+            console.log('[Engine] Global interrupt triggered: valeria_affection <= 0')
+            await loadGlobalDialogue('val_block_anytime')
+            return
+        }
 
         // Reset choice state
         store.isWaitingForChoice = false

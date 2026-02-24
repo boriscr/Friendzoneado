@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <GameOver />
     <!-- View Switcher -->
     <template v-if="store.currentView === 'menu'">
       <MainMenu />
@@ -29,6 +30,7 @@ import MainMenu from './components/MainMenu.vue'
 import NameEntry from './components/NameEntry.vue'
 import ChatList from './components/ChatList.vue'
 import ChatWindow from './components/ChatWindow.vue'
+import GameOver from './components/GameOver.vue'
 
 const store = useGameStore()
 

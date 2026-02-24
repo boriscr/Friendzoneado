@@ -12,6 +12,8 @@ export const useGameStore = defineStore('game', () => {
     const showPartIntro = ref(false)
     const currentView = ref('menu')
     const hasSave = ref(false)
+    const isGameOver = ref(false)
+    const gameOverMessage = ref('')
 
     // ── Narrative state variables ───────────────────────
     const gameState = reactive({
@@ -144,8 +146,7 @@ export const useGameStore = defineStore('game', () => {
 
     async function checkSave() {
         const { value: progress } = await Preferences.get({ key: 'gameProgress' })
-        const { value: name } = await Preferences.get({ key: 'playerName' })
-        hasSave.value = !!progress || !!name
+        hasSave.value = !!progress
     }
 
     function resetGame(keepName = true) {
@@ -177,7 +178,14 @@ export const useGameStore = defineStore('game', () => {
         currentChoices.value = []
         lastWasPlayerChoice.value = false
         gameState.quiz_points = 0
+        isGameOver.value = false
+        gameOverMessage.value = ''
         Preferences.remove({ key: 'gameProgress' })
+    }
+
+    function triggerGameOver(message) {
+        gameOverMessage.value = message
+        isGameOver.value = true
     }
 
     function startNewGame() {
@@ -254,6 +262,9 @@ export const useGameStore = defineStore('game', () => {
         isProcessing,
         isWaitingForChoice,
         currentChoices,
-        lastWasPlayerChoice
+        lastWasPlayerChoice,
+        isGameOver,
+        gameOverMessage,
+        triggerGameOver
     }
 })

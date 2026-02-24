@@ -1,0 +1,231 @@
+{
+    "chapter": 1,
+    "part": "2_v1",
+    "title": "El Incidente (Confianza)",
+    "characters": {
+        "valeria": {
+            "displayName": "Valeria",
+            "avatar": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/2-profile-valeria.webp"
+        }
+    },
+    "nodes": [
+        {
+            "id": "start",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡{{name}}! Menos mal que estás conectado. Estaba esperando a que aparecieras.",
+            "nextId": "val_v1_1"
+        },
+        {
+            "id": "val_v1_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me hace sentir mucho mejor saber que estás al otro lado. Siento que solo contigo puedo hablar de esto... ❤️",
+            "nextId": "val_v1_2"
+        },
+        {
+            "id": "val_v1_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Acaba de pasar algo muy raro y me está empezando a dar miedo. ¿Te mando un audio? Por favor.",
+            "nextId": "choice_audio_accept"
+        },
+        {
+            "id": "choice_audio_accept",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Claro Val, mándalo. Te escucho.",
+                    "nextId": "val_audio_send_1",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Dime por aquí, no puedo escuchar audios ahora.",
+                    "nextId": "val_audio_refuse",
+                    "impact": {
+                        "valeria_affection": -10
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_audio_send_1",
+            "sender": "valeria",
+            "type": "audio",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/chapter_1/1-valeria.mp3",
+            "delay": 15000,
+            "nextId": "val_after_audio"
+        },
+        {
+            "id": "val_audio_refuse",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Entiendo... lo escribiré entonces, aunque me tiemblan un poco las manos.",
+            "nextId": "val_reveal_text"
+        },
+        {
+            "id": "val_after_audio",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No me digas que estoy loca, {{name}}. Por favor. Es que sigo escuchando pasos fuera... 🥺",
+            "nextId": "val_reveal_text"
+        },
+        {
+            "id": "val_reveal_text",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ese tipo... el de la sudadera oscura que vi antes... creo que me siguió hasta el departamento.",
+            "nextId": "choice_stalker_details"
+        },
+        {
+            "id": "choice_stalker_details",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¿Cómo era exactamente? ¿Le viste la cara? 🔍",
+                    "nextId": "val_stalker_desc",
+                    "impact": {
+                        "mistery_level": 8
+                    }
+                },
+                {
+                    "text": "Val, esto es grave. Sal de ahí si puedes o enciérrate bien. 😰",
+                    "nextId": "val_stalker_confirm",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_stalker_desc",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Llevaba una sudadera con capucha. Era alto... se quedó parado frente al edificio mirando hacia mi ventana un buen rato.",
+            "nextId": "val_stalker_photo_intro"
+        },
+        {
+            "id": "val_stalker_confirm",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ya me encerré, pero siento que la puerta no es suficiente. Es horrible estar aquí sola.",
+            "nextId": "val_stalker_photo_intro"
+        },
+        {
+            "id": "val_stalker_photo_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Logré tomarle una foto desde arriba. Mira.",
+            "nextId": "val_stalker_photo"
+        },
+        {
+            "id": "val_stalker_photo",
+            "sender": "valeria",
+            "type": "image",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/3-message.webp",
+            "nextId": "choice_stalker_react"
+        },
+        {
+            "id": "choice_stalker_react",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Val... llama a la policía. No te arriesgues.",
+                    "nextId": "val_stalker_scared",
+                    "impact": {
+                        "valeria_affection": 5,
+                        "mistery_level": 5
+                    }
+                },
+                {
+                    "text": "¿Quizás sea solo un vecino nuevo? No te sugestiones...",
+                    "nextId": "val_stalker_doubt",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_stalker_scared",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No puedo... mis padres no saben que estoy aquí todavía y no quiero que sea un caos. Confío más en que tú me ayudes a pensar qué hacer.",
+            "nextId": "val_stalker_tension"
+        },
+        {
+            "id": "val_stalker_doubt",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No es un vecino, {{name}}. Un vecino no se queda 10 minutos inmóvil mirando una ventana a oscuras.",
+            "nextId": "val_stalker_tension"
+        },
+        {
+            "id": "val_stalker_tension",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Espera... escuché algo.",
+            "delay": 2000,
+            "nextId": "val_stalker_pause_1"
+        },
+        {
+            "id": "val_stalker_pause_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "...",
+            "delay": 3000,
+            "nextId": "val_stalker_noise"
+        },
+        {
+            "id": "val_stalker_noise",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Están tocando la puerta. Despacio.",
+            "nextId": "val_stalker_knocking_intro"
+        },
+        {
+            "id": "val_stalker_knocking_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "{{name}}, tengo mucho miedo. Por favor, no me dejes.",
+            "nextId": "val_knocking_audio"
+        },
+        {
+            "id": "val_knocking_audio",
+            "sender": "valeria",
+            "type": "audio",
+            "content": "https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/effects/hungry/1-stalker-shadow.mp3",
+            "delay": 15000,
+            "nextId": "val_disconnect"
+        },
+        {
+            "id": "val_disconnect",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria ha dejado de responder.",
+            "actions": [
+                {
+                    "type": "setNPCStatus",
+                    "value": false
+                }
+            ],
+            "delay": 3000,
+            "nextId": "part2_end"
+        },
+        {
+            "id": "part2_end",
+            "sender": "system",
+            "type": "part_end",
+            "content": "Fin de la Parte 2",
+            "nextPart": 3
+        }
+    ]
+}

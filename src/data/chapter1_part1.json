@@ -41,30 +41,30 @@
                     "text": "¿Valeria? ¿Cómo te atreves a escribirme después de dos años...?",
                     "nextId": "val_reclaim_1",
                     "impact": {
-                        "valeria_affection": -5,
-                        "tension_level": 10
+                        "valeria_affection": -10,
+                        "tension_level": 15
                     }
                 },
                 {
                     "text": "¿Valeria? ¡No puede ser! ¡Qué sorpresa! 😊",
                     "nextId": "val_greet_warm",
                     "impact": {
-                        "valeria_affection": 10
+                        "valeria_affection": 5
                     }
                 },
                 {
                     "text": "Perdona, ¿quién eres? No tengo este número guardado.",
                     "nextId": "val_greet_cold",
                     "impact": {
-                        "valeria_affection": -2
+                        "valeria_affection": -5
                     }
                 },
                 {
                     "text": "¿Cómo conseguiste mi número? Esto es un poco raro.",
                     "nextId": "val_greet_suspicious",
                     "impact": {
-                        "valeria_affection": -10,
-                        "mistery_level": 5
+                        "valeria_affection": -15,
+                        "mistery_level": 10
                     }
                 }
             ]
@@ -109,7 +109,7 @@
                     "text": "Éramos inseparables, Val. Me dejaste solo con un montón de preguntas.",
                     "nextId": "val_reclaim_3",
                     "impact": {
-                        "valeria_affection": 2
+                        "valeria_affection": 1
                     }
                 }
             ]
@@ -200,14 +200,14 @@
                     "text": "Lo siento, Val... de verdad no te recuerdo bien.",
                     "nextId": "val_prank_serious",
                     "impact": {
-                        "valeria_affection": -15
+                        "valeria_affection": -20
                     }
                 },
                 {
                     "text": "¡Es broma! Jajaja, claro que me acuerdo de ti, Val. Imposible olvidarte. 😂",
                     "nextId": "val_prank_reveal",
                     "impact": {
-                        "valeria_affection": 15
+                        "valeria_affection": 8
                     }
                 }
             ]
@@ -264,14 +264,15 @@
                     "text": "Sigo pensando que es raro que guardes números de hace años.",
                     "nextId": "val_suspicious_hard",
                     "impact": {
-                        "valeria_affection": -15
+                        "valeria_affection": -20,
+                        "mistery_level": 5
                     }
                 },
                 {
                     "text": "Está bien, lo siento. Es solo que no me lo esperaba. ¿Cómo estás?",
                     "nextId": "val_suspicious_soft",
                     "impact": {
-                        "valeria_affection": 8
+                        "valeria_affection": 5
                     }
                 }
             ]
@@ -328,21 +329,21 @@
                     "text": "Cómo no recordarlo... el día que casi te caes y te sostuve de la mochila 😂",
                     "nextId": "val_clouds_positive",
                     "impact": {
-                        "valeria_affection": 12
+                        "valeria_affection": 6
                     }
                 },
                 {
                     "text": "Sinceramente, me acuerdo más de los regaños que nos daban después.",
                     "nextId": "val_clouds_neutral",
                     "impact": {
-                        "valeria_affection": 5
+                        "valeria_affection": 2
                     }
                 },
                 {
                     "text": "Qué pérdida de tiempo hacíamos de jóvenes.",
                     "nextId": "val_clouds_negative_branch",
                     "impact": {
-                        "valeria_affection": -10
+                        "valeria_affection": -15
                     }
                 }
             ]
@@ -371,14 +372,14 @@
                     "text": "Éramos unos irresponsables, Val. Madura un poco.",
                     "nextId": "val_clouds_negative_hard",
                     "impact": {
-                        "valeria_affection": -15
+                        "valeria_affection": -20
                     }
                 },
                 {
                     "text": "Bueno, tal vez fui un poco duro. Tenían su encanto, supongo.",
                     "nextId": "val_clouds_negative_soft",
                     "impact": {
-                        "valeria_affection": 5
+                        "valeria_affection": 3
                     }
                 }
             ]
@@ -449,28 +450,28 @@
                     "text": "Me he metido mucho en el mundo del arte. 🎨",
                     "nextId": "val_hobby_art",
                     "impact": {
-                        "valeria_affection": 5
+                        "valeria_affection": 3
                     }
                 },
                 {
                     "text": "La tecnología es lo mío, vivo entre código y gadgets. 💻",
                     "nextId": "val_hobby_tech",
                     "impact": {
-                        "valeria_affection": 3
+                        "valeria_affection": 2
                     }
                 },
                 {
                     "text": "Cine y series, no hay nada mejor para desconectar. 🍿",
                     "nextId": "val_hobby_movies",
                     "impact": {
-                        "valeria_affection": 2
+                        "valeria_affection": 1
                     }
                 },
                 {
                     "text": "Me encanta salir a caminar y conocer lugares nuevos. 🚶‍♂️",
                     "nextId": "val_hobby_walks",
                     "impact": {
-                        "valeria_affection": 10
+                        "valeria_affection": 5
                     }
                 }
             ]
@@ -3237,9 +3238,37 @@
         {
             "id": "part1_end",
             "sender": "system",
+            "type": "text",
+            "content": "Final de la primera conversación...",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": ">=",
+                    "value": 70,
+                    "nextId": "part1_end_v1"
+                },
+                {
+                    "variable": "valeria_affection",
+                    "operator": ">=",
+                    "value": 20,
+                    "nextId": "part1_end_v2"
+                }
+            ],
+            "nextId": "val_polite_goodbye"
+        },
+        {
+            "id": "part1_end_v1",
+            "sender": "system",
             "type": "part_end",
             "content": "Fin de la Parte 1",
-            "nextPart": 2
+            "nextPart": "2_v1"
+        },
+        {
+            "id": "part1_end_v2",
+            "sender": "system",
+            "type": "part_end",
+            "content": "Fin de la Parte 1",
+            "nextPart": "2_v2"
         },
         {
             "id": "val_behavior_check_acosador",
@@ -3253,29 +3282,55 @@
             "sender": "valeria",
             "type": "text",
             "content": "Perdón por preguntar, SEÑOR SECRETO. 🙄 qué grosero.",
-            "nextId": "val_check_affection"
+            "nextId": "val_serious_intro"
         },
         {
             "id": "val_behavior_check_3",
             "sender": "valeria",
             "type": "text",
             "content": "¿'Normal'? Gracias por el 'halago' tan entusiasta. Estás insoportable hoy.",
-            "nextId": "val_check_affection"
+            "nextId": "val_serious_intro"
         },
         {
-            "id": "val_check_affection",
+            "id": "val_polite_goodbye",
             "sender": "valeria",
             "type": "text",
-            "content": "Sabes qué... no sé por qué te busqué. Pensé que seguías siendo la persona que conocí.",
-            "conditions": [
+            "content": "Sabes, {{name}}... ha sido un gusto saludarte después de tanto tiempo. Me alegra ver que estás bien.",
+            "nextId": "val_polite_goodbye_2"
+        },
+        {
+            "id": "val_polite_goodbye_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Si has tenido un mal día o las cosas no van como esperabas, espero de corazón que luches por superarlo.",
+            "nextId": "val_polite_goodbye_3"
+        },
+        {
+            "id": "val_polite_goodbye_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Solo quería pasar a saber si mi viejo amigo estaba bien. Cuídate mucho. Adiós.",
+            "actions": [
                 {
-                    "variable": "valeria_affection",
-                    "operator": "<=",
-                    "value": 0,
-                    "nextId": "val_block_ending"
+                    "type": "setNPCStatus",
+                    "value": false
                 }
             ],
-            "nextId": "val_serious_intro"
+            "nextId": "val_polite_system"
+        },
+        {
+            "id": "val_polite_system",
+            "sender": "system",
+            "type": "text",
+            "content": "Valeria ha cerrado la conversación. Tu actitud descortés ha hecho que ella no se sienta con la confianza suficiente para contarte sus problemas.",
+            "actions": [
+                {
+                    "type": "gameOver",
+                    "message": "Fuiste descortés con Valeria y ella ha decidido no volver a contactarte. Tu historia termina aquí."
+                }
+            ],
+            "delay": 5000,
+            "nextId": null
         },
         {
             "id": "val_block_ending",
@@ -3297,6 +3352,10 @@
                 {
                     "type": "setBlocked",
                     "value": true
+                },
+                {
+                    "type": "gameOver",
+                    "message": "Valeria te ha bloqueado por tu mal comportamiento. Has perdido toda oportunidad de reconciliación."
                 }
             ],
             "delay": 3000,
