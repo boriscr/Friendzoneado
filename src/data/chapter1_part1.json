@@ -79,7 +79,7 @@
             "id": "val_greet_cold",
             "sender": "valeria",
             "type": "text",
-            "content": "Ay qué cortante… 🥲",
+            "content": "Ay qué cortante… 😢",
             "nextId": "val_greet_cold_2"
         },
         {
@@ -163,7 +163,7 @@
                     "text": "Sigo pensando que es raro que guardes números de hace años.",
                     "nextId": "val_suspicious_hard",
                     "impact": {
-                        "valeria_affection": -12
+                        "valeria_affection": -15
                     }
                 },
                 {
@@ -207,7 +207,7 @@
             "id": "val_memories_intro",
             "sender": "valeria",
             "type": "text",
-            "content": "Estaba revisando fotos viejas hoy y me entró mucha nostalgia. 📸",
+            "content": "Estaba revisando fotos viejas hoy y me entró mucha nostalgia.",
             "nextId": "val_memories_1"
         },
         {
@@ -329,6 +329,1479 @@
             "sender": "valeria",
             "type": "text",
             "content": "Pero bueno... cuéntame de ti. ¿Qué ha sido de tu vida de adulto?",
+            "nextId": "val_hobby_intro"
+        },
+        {
+            "id": "val_hobby_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Y qué tal tu vida ahora? ¿Algún hobby que te mantenga ocupado o sigues siendo el mismo de antes? 😏",
+            "nextId": "choice_hobbies"
+        },
+        {
+            "id": "choice_hobbies",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Me he metido mucho en el mundo del arte. 🎨",
+                    "nextId": "val_hobby_art",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "La tecnología es lo mío, vivo entre código y gadgets. 💻",
+                    "nextId": "val_hobby_tech",
+                    "impact": {
+                        "valeria_affection": 3
+                    }
+                },
+                {
+                    "text": "Cine y series, no hay nada mejor para desconectar. 🍿",
+                    "nextId": "val_hobby_movies",
+                    "impact": {
+                        "valeria_affection": 2
+                    }
+                },
+                {
+                    "text": "Me encanta salir a caminar y conocer lugares nuevos. 🚶‍♂️",
+                    "nextId": "val_hobby_walks",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_hobby_walks",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Caminar... parece sencillo, pero tiene su aquel. A ver si de verdad sales a la montaña. Dime esto...",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_walk_q1"
+        },
+        {
+            "id": "val_walk_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cuál es el calzado más importante para evitar ampollas en una ruta de 20km? 🥾",
+            "nextId": "choice_walk_q1"
+        },
+        {
+            "id": "choice_walk_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Unas buenas botas de montaña ya 'domadas'.",
+                    "nextId": "val_walk_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Zapatillas de lona recién compradas.",
+                    "nextId": "val_walk_q2"
+                },
+                {
+                    "text": "Chancletas, para que el pie respire.",
+                    "nextId": "val_walk_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_walk_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cómo se llama la ruta de peregrinación más famosa de España que termina en Galicia?",
+            "nextId": "choice_walk_q2"
+        },
+        {
+            "id": "choice_walk_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "El Camino de Santiago.",
+                    "nextId": "val_walk_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "La Vía de la Plata.",
+                    "nextId": "val_walk_q3"
+                },
+                {
+                    "text": "La Senda del Oso.",
+                    "nextId": "val_walk_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_walk_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Si te pierdes y no tienes brújula, ¿en qué lado de los árboles suele crecer el musgo en el hemisferio norte? 🌲",
+            "nextId": "choice_walk_q3"
+        },
+        {
+            "id": "choice_walk_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "En el Norte, donde hay más sombra y humedad.",
+                    "nextId": "val_walk_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "En el Sur, buscando el sol.",
+                    "nextId": "val_walk_q4"
+                },
+                {
+                    "text": "En el Este, por donde sale el sol.",
+                    "nextId": "val_walk_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_walk_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Para cuidar las rodillas en bajadas pronunciadas, ¿qué accesorio es muy recomendable usar?",
+            "nextId": "choice_walk_q4"
+        },
+        {
+            "id": "choice_walk_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Bastones de trekking.",
+                    "nextId": "val_walk_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Rodilleras de neopreno.",
+                    "nextId": "val_walk_q5"
+                },
+                {
+                    "text": "Una buena faja lumbar.",
+                    "nextId": "val_walk_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_walk_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y la última... ¿cuánto líquido se recomienda beber aproximadamente por cada hora de caminata intensa?",
+            "nextId": "choice_walk_q5"
+        },
+        {
+            "id": "choice_walk_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Unos 500ml a un litro, en pequeños sorbos.",
+                    "nextId": "val_walk_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Nada, mejor esperar al final para refrescarse.",
+                    "nextId": "val_walk_quiz_result"
+                },
+                {
+                    "text": "Tres litros de golpe cada dos horas.",
+                    "nextId": "val_walk_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_walk_quiz_result",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Veamos si eres un senderista de verdad o solo das vueltas a la manzana...",
+            "conditions": [
+                {
+                    "variable": "quiz_points",
+                    "operator": "==",
+                    "value": 5,
+                    "nextId": "val_walk_quiz_perfect"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 3,
+                    "nextId": "val_walk_quiz_good"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 1,
+                    "nextId": "val_walk_quiz_poor"
+                }
+            ],
+            "nextId": "val_walk_quiz_fail"
+        },
+        {
+            "id": "val_walk_quiz_perfect",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Brillante! 🏔️ Se nota que conoces la montaña. Me encantaría que me llevaras a alguna ruta suave algún día.",
+            "impact": {
+                "valeria_affection": 25
+            },
+            "nextId": "val_walk_quiz_success_2"
+        },
+        {
+            "id": "val_walk_quiz_good",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No está mal, tienes nociones básicas de seguridad. Al menos no te perderías a la primera de cambio. jaja",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_walk_quiz_success_2"
+        },
+        {
+            "id": "val_walk_quiz_poor",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... creo que eres más de paseos por el parque que de senderismo real. Pero bueno, caminar es sano igual.",
+            "impact": {
+                "valeria_affection": -5
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_walk_quiz_success_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me vendría bien desconectar de la ciudad... ¿me prometes que no me dejarás abandonada en el bosque? 😏",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_walk_quiz_fail",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Eres un fraude! � No sabes nada de excursionismo. Confiesa, {{name}}, lo dijiste solo por decir.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_boaster",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_hobby_movies",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cine y series? A ver si es verdad que eres un cinéfilo o solo ves lo que sale en el top de Netflix. 😂",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_movies_q1"
+        },
+        {
+            "id": "val_movies_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Quién dirigió la famosa película 'Psicosis', esa de la escena de la ducha? 🚿",
+            "nextId": "choice_movies_q1"
+        },
+        {
+            "id": "choice_movies_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Alfred Hitchcock, el maestro del suspenso.",
+                    "nextId": "val_movies_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Steven Spielberg.",
+                    "nextId": "val_movies_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_movies_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Dime, ¿en qué película se dice la famosa frase: 'Le voy a hacer una oferta que no podrá rechazar'?",
+            "nextId": "choice_movies_q2"
+        },
+        {
+            "id": "choice_movies_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "El Padrino.",
+                    "nextId": "val_movies_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Scarface (El precio del poder).",
+                    "nextId": "val_movies_q3"
+                },
+                {
+                    "text": "Goodfellas (Uno de los nuestros).",
+                    "nextId": "val_movies_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_movies_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Quién es el padre de Luke Skywalker en la saga original de Star Wars?",
+            "nextId": "choice_movies_q3"
+        },
+        {
+            "id": "choice_movies_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Darth Vader.",
+                    "nextId": "val_movies_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Obi-Wan Kenobi.",
+                    "nextId": "val_movies_q4"
+                },
+                {
+                    "text": "Emperador Palpatine.",
+                    "nextId": "val_movies_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_movies_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "En terminología cinematográfica, ¿cómo se le llama al objeto que hace que la trama avance pero que en sí mismo no es importante? Hitchcock lo usaba mucho.",
+            "nextId": "choice_movies_q4"
+        },
+        {
+            "id": "choice_movies_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "MacGuffin.",
+                    "nextId": "val_movies_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Cliffhanger.",
+                    "nextId": "val_movies_q5"
+                },
+                {
+                    "text": "Plot Twist.",
+                    "nextId": "val_movies_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_movies_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y la última... ¿qué película ganó el primer Oscar a la Mejor Película de Animación?",
+            "nextId": "choice_movies_q5"
+        },
+        {
+            "id": "choice_movies_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Shrek.",
+                    "nextId": "val_movies_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Toy Story.",
+                    "nextId": "val_movies_quiz_result"
+                },
+                {
+                    "text": "El Rey León.",
+                    "nextId": "val_movies_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_movies_quiz_result",
+            "sender": "valeria",
+            "type": "text",
+            "content": "A ver si eres un crítico de cine de verdad...",
+            "conditions": [
+                {
+                    "variable": "quiz_points",
+                    "operator": "==",
+                    "value": 5,
+                    "nextId": "val_movies_quiz_perfect"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 3,
+                    "nextId": "val_movies_quiz_good"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 1,
+                    "nextId": "val_movies_quiz_poor"
+                }
+            ],
+            "nextId": "val_movies_quiz_fail"
+        },
+        {
+            "id": "val_movies_quiz_perfect",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Guau! 🍿 Has acertado todas. De verdad sabes de cine clásico y teoría. Me has dejado impresionada.",
+            "impact": {
+                "valeria_affection": 25
+            },
+            "nextId": "val_movies_quiz_success_2"
+        },
+        {
+            "id": "val_movies_quiz_good",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bueno, se nota que te gusta el cine de verdad, no solo los blockbusters. 😊",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_movies_quiz_success_2"
+        },
+        {
+            "id": "val_movies_quiz_poor",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... creo que solo ves las películas que están de moda. Pero bueno, ya te enseñaré yo algo de cine de autor. jaja",
+            "impact": {
+                "valeria_affection": -5
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_movies_quiz_success_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Deberíamos ir al cine un día de estos, o mejor... venir a casa a ver algún clásico con palomitas. 😏",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_movies_quiz_fail",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué farsante! 😂 No tienes ni idea de cine. Lo dijiste por decir, ¿verdad?",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_boaster",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_hobby_art",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Arte? ¡No te lo creo! En la escuela lo más artístico que hacías era dibujar monigotes en los bancos. 😂",
+            "nextId": "choice_art_type"
+        },
+        {
+            "id": "choice_art_type",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "He descubierto que tengo talento para la música. 🎼",
+                    "nextId": "val_hobby_music_check"
+                },
+                {
+                    "text": "La pintura se ha vuelto mi terapia, en serio. 🖌️",
+                    "nextId": "val_hobby_painting_check"
+                }
+            ]
+        },
+        {
+            "id": "val_hobby_music_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "A ver, a ver... No me mientas. Si tanto sabes de música, dime una cosa...",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_music_q1"
+        },
+        {
+            "id": "val_music_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cuál es la famosa quinta sinfonía conocida por su inicio de 'tres notas cortas y una larga'? 🤔",
+            "nextId": "choice_music_q1"
+        },
+        {
+            "id": "choice_music_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Beethoven, por supuesto. Es icónica.",
+                    "nextId": "val_music_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Mozart, lo sabe todo el mundo.",
+                    "nextId": "val_music_q2"
+                },
+                {
+                    "text": "Bach, creo.",
+                    "nextId": "val_music_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_music_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bien... siguiente. ¿Cuál es el compás más común, ese que se le dice 'compasillo'?",
+            "nextId": "choice_music_q2"
+        },
+        {
+            "id": "choice_music_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "El de 4/4.",
+                    "nextId": "val_music_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "El de 3/4, como el vals.",
+                    "nextId": "val_music_q3"
+                },
+                {
+                    "text": "El de 6/8.",
+                    "nextId": "val_music_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_music_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Interesante. En la clave de sol, ¿qué nota se sitúa justo en la segunda línea del pentagrama (contando desde abajo)?",
+            "nextId": "choice_music_q3"
+        },
+        {
+            "id": "choice_music_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "La nota Sol.",
+                    "nextId": "val_music_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "La nota Mi.",
+                    "nextId": "val_music_q4"
+                },
+                {
+                    "text": "La nota Si.",
+                    "nextId": "val_music_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_music_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cuántas teclas blancas y negras tiene un piano estándar moderno?",
+            "nextId": "choice_music_q4"
+        },
+        {
+            "id": "choice_music_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "88 teclas.",
+                    "nextId": "val_music_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "64 teclas.",
+                    "nextId": "val_music_q5"
+                },
+                {
+                    "text": "102 teclas.",
+                    "nextId": "val_music_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_music_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "La última... ¿quién compuso la famosa suite 'Las cuatro estaciones'?",
+            "nextId": "choice_music_q5"
+        },
+        {
+            "id": "choice_music_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Antonio Vivaldi.",
+                    "nextId": "val_music_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Frédéric Chopin.",
+                    "nextId": "val_music_quiz_result"
+                },
+                {
+                    "text": "Richard Wagner.",
+                    "nextId": "val_music_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_music_quiz_result",
+            "sender": "valeria",
+            "type": "text",
+            "content": "A ver... déjame pensar en tus respuestas...",
+            "conditions": [
+                {
+                    "variable": "quiz_points",
+                    "operator": "==",
+                    "value": 5,
+                    "nextId": "val_music_quiz_perfect"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 3,
+                    "nextId": "val_music_quiz_good"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 1,
+                    "nextId": "val_music_quiz_poor"
+                }
+            ],
+            "nextId": "val_music_quiz_fail"
+        },
+        {
+            "id": "val_music_quiz_perfect",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Increíble! Has acertado todas. 🎹 De verdad te has convertido en un experto.",
+            "impact": {
+                "valeria_affection": 25
+            },
+            "nextId": "val_music_quiz_success_2"
+        },
+        {
+            "id": "val_music_quiz_good",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Bueno, te has defendido bastante bien. Se nota que algo sabes. �",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_music_quiz_success_2"
+        },
+        {
+            "id": "val_music_quiz_poor",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... creo que te falta practicar un poco más. Pero al menos no has mentido en todo. jaja",
+            "impact": {
+                "valeria_affection": -5
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_music_quiz_success_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Un día de estos podrías venir a mi departamento a enseñarme a tocar el piano. Tengo uno que está juntando polvo... 😏",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_music_quiz_fail",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡MENTIROSO! 😂 No has dado ni una. Ya veo que sigues siendo el mismo fanfarrón de siempre que quiere quedar bien.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_boaster",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_hobby_painting_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pintura... interesante. A ver si es verdad. Contéstame estas preguntas...",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_paint_q1"
+        },
+        {
+            "id": "val_paint_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Quién pintó 'La persistencia de la memoria', ese cuadro de los relojes derretidos? 🎨",
+            "nextId": "choice_paint_q1"
+        },
+        {
+            "id": "choice_paint_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Salvador Dalí, un genio.",
+                    "nextId": "val_paint_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Picasso, en su etapa cubista.",
+                    "nextId": "val_paint_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_paint_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué técnica utiliza el contraste fuerte entre luces y sombras para dar volumen? Es muy de Caravaggio.",
+            "nextId": "choice_paint_q2"
+        },
+        {
+            "id": "choice_paint_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Claroscuro.",
+                    "nextId": "val_paint_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Sfumato.",
+                    "nextId": "val_paint_q3"
+                },
+                {
+                    "text": "Impresionismo.",
+                    "nextId": "val_paint_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_paint_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿En qué museo se encuentra actualmente 'La noche estrellada' de Van Gogh?",
+            "nextId": "choice_paint_q3"
+        },
+        {
+            "id": "choice_paint_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "En el MoMA de Nueva York.",
+                    "nextId": "val_paint_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "En el Louvre de París.",
+                    "nextId": "val_paint_q4"
+                },
+                {
+                    "text": "En el Museo del Prado.",
+                    "nextId": "val_paint_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_paint_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué pintura de Picasso representa el bombardeo de una ciudad vasca durante la Guerra Civil Española?",
+            "nextId": "choice_paint_q4"
+        },
+        {
+            "id": "choice_paint_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "El Guernica.",
+                    "nextId": "val_paint_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Las Meninas.",
+                    "nextId": "val_paint_q5"
+                },
+                {
+                    "text": "La Libertad guiando al pueblo.",
+                    "nextId": "val_paint_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_paint_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y la última... ¿qué artista mexicana es famosa por sus autorretratos y su relación con Diego Rivera?",
+            "nextId": "choice_paint_q5"
+        },
+        {
+            "id": "choice_paint_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Frida Kahlo.",
+                    "nextId": "val_painting_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Tarsila do Amaral.",
+                    "nextId": "val_painting_quiz_result"
+                },
+                {
+                    "text": "Remedios Varo.",
+                    "nextId": "val_painting_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_painting_quiz_result",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Déjame ver qué tal te ha ido con los pinceles...",
+            "conditions": [
+                {
+                    "variable": "quiz_points",
+                    "operator": "==",
+                    "value": 5,
+                    "nextId": "val_painting_quiz_perfect"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 3,
+                    "nextId": "val_painting_quiz_good"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 1,
+                    "nextId": "val_painting_quiz_poor"
+                }
+            ],
+            "nextId": "val_painting_quiz_fail"
+        },
+        {
+            "id": "val_painting_quiz_perfect",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Exacto. Parece que de verdad te interesa el tema. 😊 Me has dejado con la boca abierta.",
+            "impact": {
+                "valeria_affection": 25
+            },
+            "nextId": "val_painting_quiz_success_2"
+        },
+        {
+            "id": "val_painting_quiz_good",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No está mal, algo de cultura artística tienes. Podría ser peor. jaja",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_painting_quiz_success_2"
+        },
+        {
+            "id": "val_painting_quiz_poor",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Uff... creo que solo has visto cuadros en los libros de texto del colegio. Pero al menos no eres un caso perdido.",
+            "impact": {
+                "valeria_affection": -5
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_painting_quiz_success_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Podríamos ir a una galería juntos algún día. Necesito a alguien que me explique lo que veo. jaja",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_painting_quiz_fail",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ay, {{name}}! Definitivamente solo querías lucirte. No hace falta que mientas para caerme bien.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_boaster",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_hobby_tech",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Tecnología? Si en el colegio para ti 'tecnología' era prender el monitor... 😂",
+            "nextId": "val_hobby_tech_2"
+        },
+        {
+            "id": "val_hobby_tech_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "A ver, dime, ¿qué rama te gusta tanto ahora?",
+            "nextId": "choice_tech_type"
+        },
+        {
+            "id": "choice_tech_type",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Me dedico a la programación. Construyo aplicaciones.",
+                    "nextId": "val_hobby_code_quiz"
+                },
+                {
+                    "text": "Hardware y gadgets, me encanta armar y desarmar cosas.",
+                    "nextId": "val_hobby_hardware_quiz"
+                }
+            ]
+        },
+        {
+            "id": "val_hobby_code_quiz",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ah, un programador... Interesante. A ver si no estás mintiendo. Contesta esto...",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_code_q1"
+        },
+        {
+            "id": "val_code_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué significa 'HTML'? Es lo básico de lo básico, ¿no? 🤔",
+            "nextId": "choice_code_q1"
+        },
+        {
+            "id": "choice_code_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "HyperText Markup Language.",
+                    "nextId": "val_code_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "High Tech Machine Logic.",
+                    "nextId": "val_code_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_code_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cuál de estos comandos se usa en Git para enviar tus cambios locales a un repositorio remoto?",
+            "nextId": "choice_code_q2"
+        },
+        {
+            "id": "choice_code_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "git push.",
+                    "nextId": "val_code_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "git pull.",
+                    "nextId": "val_code_q3"
+                },
+                {
+                    "text": "git commit.",
+                    "nextId": "val_code_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_code_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "En HTTP, ¿qué significa un código de estado que empieza por 4, como el famoso 404?",
+            "nextId": "choice_code_q3"
+        },
+        {
+            "id": "choice_code_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Error del cliente (No encontrado, etc).",
+                    "nextId": "val_code_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Éxito en la petición.",
+                    "nextId": "val_code_q4"
+                },
+                {
+                    "text": "Error interno del servidor.",
+                    "nextId": "val_code_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_code_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué tipo de lenguaje es Java?",
+            "nextId": "choice_code_q4"
+        },
+        {
+            "id": "choice_code_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Orientado a Objetos.",
+                    "nextId": "val_code_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Lenguaje de bajo nivel (Ensamblador).",
+                    "nextId": "val_code_q5"
+                },
+                {
+                    "text": "Hoja de estilos.",
+                    "nextId": "val_code_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_code_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y para terminar... ¿qué valor devuelve la expresión (true && false)?",
+            "nextId": "choice_code_q5"
+        },
+        {
+            "id": "choice_code_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "false.",
+                    "nextId": "val_tech_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "true.",
+                    "nextId": "val_tech_quiz_result"
+                },
+                {
+                    "text": "Ninguno, da error.",
+                    "nextId": "val_tech_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_hobby_hardware_quiz",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Interesante... dime una cosa entonces. A ver si de verdad sabes de hardware.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_hard_q1"
+        },
+        {
+            "id": "val_hard_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué componente de la computadora se considera el 'cerebro' que procesa las instrucciones? 🧠",
+            "nextId": "choice_hard_q1"
+        },
+        {
+            "id": "choice_hard_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "La CPU (Procesador).",
+                    "nextId": "val_hard_q2",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "La memoria RAM.",
+                    "nextId": "val_hard_q2"
+                },
+                {
+                    "text": "La tarjeta de video.",
+                    "nextId": "val_hard_q2"
+                }
+            ]
+        },
+        {
+            "id": "val_hard_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Dónde se guardan los archivos de forma permanente, incluso si apagas la computadora?",
+            "nextId": "choice_hard_q2"
+        },
+        {
+            "id": "choice_hard_q2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "En el Disco Duro o SSD.",
+                    "nextId": "val_hard_q3",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "En la fuente de poder.",
+                    "nextId": "val_hard_q3"
+                },
+                {
+                    "text": "En la RAM.",
+                    "nextId": "val_hard_q3"
+                }
+            ]
+        },
+        {
+            "id": "val_hard_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué significan las siglas RAM?",
+            "nextId": "choice_hard_q3"
+        },
+        {
+            "id": "choice_hard_q3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Random Access Memory.",
+                    "nextId": "val_hard_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Ready Apple Module.",
+                    "nextId": "val_hard_q4"
+                },
+                {
+                    "text": "Remote Access Monitor.",
+                    "nextId": "val_hard_q4"
+                }
+            ]
+        },
+        {
+            "id": "val_hard_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cómo se llama la placa base donde se conectan todos los componentes?",
+            "nextId": "choice_hard_q4"
+        },
+        {
+            "id": "choice_hard_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Motherboard (Placa Madre).",
+                    "nextId": "val_hard_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Sound Card.",
+                    "nextId": "val_hard_q5"
+                },
+                {
+                    "text": "Power Supply.",
+                    "nextId": "val_hard_q5"
+                }
+            ]
+        },
+        {
+            "id": "val_hard_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y la última... ¿cuál es el estándar actual para conectar un monitor y transmitir video digital de alta definición?",
+            "nextId": "choice_hard_q5"
+        },
+        {
+            "id": "choice_hard_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "HDMI o DisplayPort.",
+                    "nextId": "val_tech_quiz_result",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "VGA.",
+                    "nextId": "val_tech_quiz_result"
+                },
+                {
+                    "text": "USB 2.0.",
+                    "nextId": "val_tech_quiz_result"
+                }
+            ]
+        },
+        {
+            "id": "val_tech_quiz_result",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Déjame analizar tus respuestas técnicas...",
+            "conditions": [
+                {
+                    "variable": "quiz_points",
+                    "operator": "==",
+                    "value": 5,
+                    "nextId": "val_tech_quiz_perfect"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 3,
+                    "nextId": "val_tech_quiz_good"
+                },
+                {
+                    "variable": "quiz_points",
+                    "operator": ">=",
+                    "value": 1,
+                    "nextId": "val_tech_quiz_poor"
+                }
+            ],
+            "nextId": "val_tech_quiz_fail_final"
+        },
+        {
+            "id": "val_tech_quiz_perfect",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Cielos! Eres un auténtico experto. 💻 Me gusta ver que ahora tienes intereses tan... intelectuales. jaja",
+            "impact": {
+                "valeria_affection": 25
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_tech_quiz_good",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Nada mal. Se nota que de verdad trabajas de eso o al menos te apasiona. 😊",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_tech_quiz_poor",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... creo que apenas estás aprendiendo, ¿no? Pero bueno, al menos lo intentaste.",
+            "impact": {
+                "valeria_affection": -5
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_tech_quiz_fail_final",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡LO SABÍA! 😂 Estás mintiendo de forma descarada. No has dado ni una.",
+            "nextId": "val_tech_quiz_fail_2"
+        },
+        {
+            "id": "val_tech_quiz_fail_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Eres un mentiroso, {{name}}. No me molestaría si no supieras, pero me molesta que intentes engañarme.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_liar",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
             "nextId": "val_status_1"
         },
         {
@@ -362,7 +1835,7 @@
                     "text": "No te incumbe mucho qué hago ahora, ¿no crees?",
                     "nextId": "val_behavior_check_2",
                     "impact": {
-                        "valeria_affection": -15
+                        "valeria_affection": -20
                     }
                 }
             ]
@@ -664,6 +2137,134 @@
             "sender": "valeria",
             "type": "text",
             "content": "No te escribí solo para reírnos de la secundaria. 😔",
+            "nextId": "choice_flirty_check"
+        },
+        {
+            "id": "choice_flirty_check",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "La verdad es que te extrañaba más de lo que imaginaba... ❤️",
+                    "nextId": "val_flirty_response",
+                    "conditions": [
+                        {
+                            "variable": "valeria_affection",
+                            "operator": ">=",
+                            "value": 100,
+                            "nextId": "val_flirty_response"
+                        }
+                    ],
+                    "impact": {
+                        "valeria_affection": 20
+                    }
+                },
+                {
+                    "text": "¿Qué pasa, Val? Me estás asustando un poco.",
+                    "nextId": "val_serious_behavior_check",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "Dime ya para qué me buscaste, tengo cosas que hacer. 🙄",
+                    "nextId": "val_serious_behavior_check",
+                    "impact": {
+                        "valeria_affection": -15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_flirty_response",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ay... {{name}}... No sabía que podía ponerte así de tierno con solo una charla. 😳",
+            "nextId": "val_flirty_response_2"
+        },
+        {
+            "id": "val_flirty_response_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me haces sentir algo que... bueno, mejor lo dejamos para después. jaja",
+            "nextId": "val_serious_behavior_check"
+        },
+        {
+            "id": "val_serious_behavior_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Es que... bueno, me pareció un poco raro lo de antes.",
+            "conditions": [
+                {
+                    "variable": "is_liar",
+                    "operator": "==",
+                    "value": true,
+                    "nextId": "val_behavior_liar_comment"
+                },
+                {
+                    "variable": "is_boaster",
+                    "operator": "==",
+                    "value": true,
+                    "nextId": "val_behavior_boaster_comment"
+                }
+            ],
+            "nextId": "val_serious_affection_check"
+        },
+        {
+            "id": "val_behavior_liar_comment",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Eso de mentirme con tus supuestos conocimientos de tecnología... no era necesario. Me deja pensando si puedo confiar en lo que me dices ahora.",
+            "nextId": "val_serious_affection_check"
+        },
+        {
+            "id": "val_behavior_boaster_comment",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Esa actitud de fanfarrón con lo del arte... no va contigo. Siempre fuiste honesto conmigo, o eso creía.",
+            "nextId": "val_serious_affection_check"
+        },
+        {
+            "id": "val_serious_affection_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero bueno... supongo que todos cambiamos.",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": ">",
+                    "value": 80,
+                    "nextId": "val_serious_affection_high"
+                },
+                {
+                    "variable": "valeria_affection",
+                    "operator": "<",
+                    "value": 40,
+                    "nextId": "val_serious_affection_low"
+                }
+            ],
+            "nextId": "val_serious_final_bridge"
+        },
+        {
+            "id": "val_serious_affection_high",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Eres increíble, {{name}}. Por eso siempre fuiste mi persona favorita. ❤️",
+            "nextId": "val_serious_final_bridge"
+        },
+        {
+            "id": "val_serious_affection_low",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Aunque a veces me den ganas de bloquearte por lo odioso que puedes ser... jaja",
+            "nextId": "val_serious_final_bridge"
+        },
+        {
+            "id": "val_serious_final_bridge",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Escucha... hay una razón por la que te busqué precisamente ahora. 😟",
             "nextId": "part1_end"
         },
         {

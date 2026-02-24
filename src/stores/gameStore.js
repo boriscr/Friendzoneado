@@ -16,7 +16,10 @@ export const useGameStore = defineStore('game', () => {
     // ── Narrative state variables ───────────────────────
     const gameState = reactive({
         valeria_affection: 50,
-        mistery_level: 0
+        mistery_level: 0,
+        is_liar: false,
+        is_boaster: false,
+        quiz_points: 0
     })
 
     // ── Chat ────────────────────────────────────────────
@@ -28,6 +31,12 @@ export const useGameStore = defineStore('game', () => {
     const typingSender = ref('')
     const isNPCConnected = ref(true)
     const isBlocked = ref(false)
+
+    // ── Engine Internal State (Centralized) ─────────────
+    const isProcessing = ref(false)
+    const isWaitingForChoice = ref(false)
+    const currentChoices = ref([])
+    const lastWasPlayerChoice = ref(false)
 
     // ── Chapters Data ───────────────────────────────────
     const chapters = ref([
@@ -149,6 +158,8 @@ export const useGameStore = defineStore('game', () => {
         hasSave.value = false
         gameState.valeria_affection = 50
         gameState.mistery_level = 0
+        gameState.is_liar = false
+        gameState.is_boaster = false
         chatHistory.value = []
         currentNodeId.value = null
         isTyping.value = false
@@ -157,6 +168,13 @@ export const useGameStore = defineStore('game', () => {
         typingSender.value = ''
         isNPCConnected.value = true
         isBlocked.value = false
+
+        // Reset centralized engine state
+        isProcessing.value = false
+        isWaitingForChoice.value = false
+        currentChoices.value = []
+        lastWasPlayerChoice.value = false
+        gameState.quiz_points = 0
         Preferences.remove({ key: 'gameProgress' })
     }
 
@@ -229,6 +247,11 @@ export const useGameStore = defineStore('game', () => {
         resetGame,
         startNewGame,
         continueGame,
-        selectChapter
+        selectChapter,
+        // Engine State (Centralized)
+        isProcessing,
+        isWaitingForChoice,
+        currentChoices,
+        lastWasPlayerChoice
     }
 })

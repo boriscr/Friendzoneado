@@ -3,8 +3,6 @@
     <div class="name-entry-card">
       <div class="card-glow"></div>
       <div class="card-content">
-        <div class="app-icon">💬</div>
-        <h1 class="app-title">Friendzoneado</h1>
         <p class="app-subtitle">Una historia interactiva que cambiará con cada decisión que tomes.</p>
 
         <form @submit.prevent="handleSubmit" class="name-form">

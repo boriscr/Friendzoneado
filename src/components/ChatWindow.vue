@@ -138,6 +138,13 @@ async function initChat() {
   if (store.chatHistory.length > 0 && store.currentNodeId) {
     // Resume from where we left off
     isChapterEnded.value = false
+
+    // Safety: don't start a second engine loop if one is already running
+    if (store.isProcessing) {
+      console.log('Engine already processing, skipping resume call')
+      return
+    }
+
     await engine.resumeFromNode(store.currentChapter, store.currentPart, store.currentNodeId)
   } else if (store.chatHistory.length === 0) {
     // Fresh start: Load metadata so we have the title, then show intro
