@@ -27,6 +27,20 @@
   --border-subtle: rgba(255, 255, 255, 0.06);
 }
 
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  50% {
+    transform: scale(1.1) translate(-1%, -1%);
+  }
+
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
 *,
 *::before,
 *::after {

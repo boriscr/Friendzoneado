@@ -312,6 +312,13 @@ export function useDialogEngine() {
         }
     }
 
+    function resetEngine() {
+        waitingForChoice.value = false
+        currentChoices.value = []
+        isProcessing.value = false
+        lastWasPlayerChoice.value = false
+    }
+
     // ── Exposed API ──────────────────────────────────────
 
     const isWaitingForChoice = computed(() => waitingForChoice.value)
@@ -323,6 +330,7 @@ export function useDialogEngine() {
         loadPartData,
         loadChapter, // Exported to allow manual loading if needed
         selectChoice,
+        resetEngine,
         isWaitingForChoice,
         choices,
         isProcessing: computed(() => isProcessing.value)

@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@capacitor/android": "^8.1.0",
+    "@capacitor/app": "^8.0.1",
     "@capacitor/cli": "^8.1.0",
     "@capacitor/core": "^8.1.0",
     "@capacitor/preferences": "^8.0.1",
+    "@capacitor/screen-orientation": "^8.0.1",
     "pinia": "^3.0.4",
     "vue": "^3.5.25"
   },

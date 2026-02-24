@@ -109,6 +109,8 @@ async function handleChoice(index) {
 // ── Reset ──────────────────────────────────────────
 function handleReset() {
   store.resetGame()
+  engine.resetEngine()
+  initChat()
 }
 
 // ── Part management ────────────────────────────────
@@ -118,9 +120,11 @@ async function handlePartStart() {
 }
 
 // ── Start / Resume ─────────────────────────────────
-onMounted(async () => {
-  // Try to load saved progress
-  await store.loadProgress()
+async function initChat() {
+  // Try to load saved progress (if not already reset)
+  if (store.chatHistory.length === 0 && !store.gameStarted) {
+    await store.loadProgress()
+  }
 
   if (store.chatHistory.length > 0 && store.currentNodeId) {
     // Resume from where we left off
@@ -131,15 +135,17 @@ onMounted(async () => {
     isChapterEnded.value = false
     await engine.loadPartData(store.currentChapter, store.currentPart)
     store.showPartIntro = true
-  }
-  // else: chatHistory exists but currentNodeId is null → chapter finished or between parts
-  else if (store.showPartIntro) {
+  } else if (store.showPartIntro) {
     isChapterEnded.value = false
   } else {
     isChapterEnded.value = true
   }
 
   scrollToBottom()
+}
+
+onMounted(() => {
+  initChat()
 })
 </script>
 

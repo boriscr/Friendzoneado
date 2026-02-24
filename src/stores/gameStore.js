@@ -10,6 +10,8 @@ export const useGameStore = defineStore('game', () => {
     const currentPart = ref(1)
     const currentPartTitle = ref('')
     const showPartIntro = ref(false)
+    const currentView = ref('menu')
+    const hasSave = ref(false)
 
     // ── Narrative state variables ───────────────────────
     const gameState = reactive({
@@ -26,6 +28,24 @@ export const useGameStore = defineStore('game', () => {
     const typingSender = ref('')
     const isNPCConnected = ref(true)
     const isBlocked = ref(false)
+
+    // ── Chapters Data ───────────────────────────────────
+    const chapters = ref([
+        {
+            id: 1,
+            title: 'Capítulo 1: Lazos de Sangre',
+            subtitle: 'Un reencuentro inesperado que desatará una red de secretos y obsesión.',
+            image: 'https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_1/1-portada.webp',
+            unlocked: true
+        },
+        {
+            id: 2,
+            title: 'Capítulo 2: Sombras del Pasado',
+            subtitle: 'Las consecuencias de tus actos comienzan a manifestarse. No hay vuelta atrás.',
+            image: 'https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/img/chapter_2/2-portada.webp',
+            unlocked: false // Will be set to true when Chapter 1 ends
+        }
+    ])
 
     // ── Actions: player name ────────────────────────────
     async function setPlayerName(name) {
@@ -89,6 +109,7 @@ export const useGameStore = defineStore('game', () => {
     async function loadProgress() {
         const { value } = await Preferences.get({ key: 'gameProgress' })
         if (value) {
+            hasSave.value = true
             try {
                 const data = JSON.parse(value)
                 Object.assign(gameState, data.gameState)
@@ -104,12 +125,19 @@ export const useGameStore = defineStore('game', () => {
         }
     }
 
+    async function checkSave() {
+        const { value: progress } = await Preferences.get({ key: 'gameProgress' })
+        const { value: name } = await Preferences.get({ key: 'playerName' })
+        hasSave.value = !!progress || !!name
+    }
+
     function resetGame() {
         playerName.value = ''
         gameStarted.value = false
         currentChapter.value = 1
         currentPart.value = 1
         showPartIntro.value = false
+        hasSave.value = false
         gameState.valeria_affection = 50
         gameState.mistery_level = 0
         chatHistory.value = []
@@ -124,6 +152,26 @@ export const useGameStore = defineStore('game', () => {
         Preferences.remove({ key: 'playerName' })
     }
 
+    function startNewGame() {
+        resetGame()
+        currentView.value = 'nameEntry'
+    }
+
+    async function continueGame() {
+        await loadProgress()
+        currentView.value = 'chat'
+    }
+
+    function selectChapter(id) {
+        const chapter = chapters.value.find(c => c.id === id)
+        if (chapter && chapter.unlocked) {
+            resetGame()
+            currentChapter.value = id
+            currentPart.value = 1
+            currentView.value = 'nameEntry'
+        }
+    }
+
     return {
         // state
         playerName,
@@ -133,6 +181,8 @@ export const useGameStore = defineStore('game', () => {
         currentPart,
         currentPartTitle,
         showPartIntro,
+        currentView,
+        hasSave,
         chatHistory,
         currentNodeId,
         isTyping,
@@ -141,6 +191,7 @@ export const useGameStore = defineStore('game', () => {
         typingSender,
         isNPCConnected,
         isBlocked,
+        chapters,
         // actions
         setPlayerName,
         loadPlayerName,
@@ -150,6 +201,10 @@ export const useGameStore = defineStore('game', () => {
         applyImpact,
         saveProgress,
         loadProgress,
-        resetGame
+        checkSave,
+        resetGame,
+        startNewGame,
+        continueGame,
+        selectChapter
     }
 })

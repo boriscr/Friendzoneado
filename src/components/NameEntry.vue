@@ -41,10 +41,9 @@ onMounted(() => {
 
 async function handleSubmit() {
   if (!name.value.trim()) return
-  store.playerName = name.value.trim()
-  store.gameStarted = true
   try {
-    await store.setPlayerName(name.value)
+    await store.setPlayerName(name.value.trim())
+    store.currentView = 'chat'
   } catch (e) {
     console.warn('Could not save player name:', e)
   }

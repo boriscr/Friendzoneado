@@ -4,7 +4,7 @@
 const CDN_BASE = 'https://cdn.jsdelivr.net/gh/boriscr/FriendzoneadoFiles/audio/effects/messages'
 
 const SOUNDS = {
-    typing: `${CDN_BASE}/writing-messaje.mp3`,
+    typing: `${CDN_BASE}/writing-message.mp3`,
     send: `${CDN_BASE}/send-message.mp3`,
     receive: `${CDN_BASE}/receive-message.mp3`
 }
@@ -41,6 +41,27 @@ export function playSound(name) {
         }
     } catch (e) {
         // Silently fail — sounds are non-critical
+    }
+}
+
+// ── Background Music ────────────────────────────────
+let bgMusic = null
+
+export function playBackgroundMusic(url, volume = 0.4) {
+    if (bgMusic) {
+        bgMusic.pause()
+        bgMusic = null
+    }
+    bgMusic = new Audio(url)
+    bgMusic.loop = true
+    bgMusic.volume = volume
+    bgMusic.play().catch(e => console.warn('BGM Auto-play blocked:', e))
+}
+
+export function stopBackgroundMusic() {
+    if (bgMusic) {
+        bgMusic.pause()
+        bgMusic = null
     }
 }
 
