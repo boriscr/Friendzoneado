@@ -13,6 +13,86 @@
             "id": "start",
             "sender": "valeria",
             "type": "text",
+            "content": "Analizando estado de Valeria...",
+            "conditions": [
+                {
+                    "variable": "knows_address",
+                    "operator": "==",
+                    "value": true,
+                    "nextId": "check_address_affection"
+                }
+            ],
+            "nextId": "check_no_address_affection"
+        },
+        {
+            "id": "check_address_affection",
+            "sender": "valeria",
+            "type": "text",
+            "content": "...",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": ">=",
+                    "value": 80,
+                    "nextId": "start_address_high"
+                }
+            ],
+            "nextId": "start_address_low"
+        },
+        {
+            "id": "check_no_address_affection",
+            "sender": "valeria",
+            "type": "text",
+            "content": "...",
+            "conditions": [
+                {
+                    "variable": "valeria_affection",
+                    "operator": ">=",
+                    "value": 80,
+                    "nextId": "start_no_address_high"
+                }
+            ],
+            "nextId": "start_standard"
+        },
+        {
+            "id": "start_address_high",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡{{name}}! Menos mal que estás conectado. No dejo de pensar en lo que dijiste de venir a visitarme... ❤️",
+            "nextId": "val_address_high_2"
+        },
+        {
+            "id": "val_address_high_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me hace sentir mucho más segura saber que al menos alguien sabe dónde estoy. Pero... acaba de pasar algo raro y no sé a quién más recurrir.",
+            "nextId": "val_audio_ask"
+        },
+        {
+            "id": "start_address_low",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Hola {{name}}. Oye, sobre lo de antes... perdón si fui un poco cortante con lo de mi dirección. Es solo que todo es muy nuevo aquí.",
+            "nextId": "val_address_low_2"
+        },
+        {
+            "id": "val_address_low_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero la verdad es que ahora desearía haberte dado más detalles... algo me está asustando mucho.",
+            "nextId": "val_audio_ask"
+        },
+        {
+            "id": "start_no_address_high",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Hola! Estaba esperando a que aparecieras. Necesito contarte algo, pero es muy difícil por texto. Siento que si lo escribo sonará estúpido.",
+            "nextId": "val_audio_ask"
+        },
+        {
+            "id": "start_standard",
+            "sender": "valeria",
+            "type": "text",
             "content": "Necesito contarte algo, pero es muy difícil por texto. Siento que si lo escribo sonará estúpido.",
             "nextId": "val_audio_ask"
         },
@@ -68,10 +148,17 @@
             "nextId": "val_reveal_text"
         },
         {
+            "id": "val_audio_refuse_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Es horrible tener que pasar por esto sola, {{name}}. Siento que si estuvieras aquí, todo sería diferente.",
+            "nextId": "val_reveal_text"
+        },
+        {
             "id": "val_after_audio",
             "sender": "valeria",
             "type": "text",
-            "content": "No me digas que estoy loca, por favor. 🥺",
+            "content": "No me digas que estoy loca, por favor. Sigo escuchando cosas fuera... 🥺",
             "nextId": "val_reveal_text"
         },
         {
@@ -93,6 +180,49 @@
             "sender": "valeria",
             "type": "text",
             "content": "Ese tipo... la sombra que vi fuera de la tienda... {{name}}, creo que me siguió hasta aquí.",
+            "nextId": "choice_stalker_details"
+        },
+        {
+            "id": "choice_stalker_details",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¿Cómo era exactamente? ¿Le viste la cara o algún detalle? 🔍",
+                    "nextId": "val_stalker_desc",
+                    "impact": {
+                        "mistery_level": 10
+                    }
+                },
+                {
+                    "text": "Val, esto es grave. ¿Estás segura de que es la misma persona? 😰",
+                    "nextId": "val_stalker_confirm",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_stalker_desc",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Llevaba una sudadera oscura, con la capucha puesta. Era alto... y se movía de una forma muy extraña, como si supiera exactamente dónde ocultarse de las luces.",
+            "nextId": "val_stalker_desc_2"
+        },
+        {
+            "id": "val_stalker_desc_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Lo más aterrador fue cuando se quedó parado frente a mi edificio. Simplemente mirando hacia arriba... a mi ventana.",
+            "nextId": "val_stalker_photo_intro"
+        },
+        {
+            "id": "val_stalker_confirm",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Sí! Tenía esa misma forma de caminar... como encogido. Y esa sudadera azul oscuro... no puedo sacármelo de la cabeza.",
             "nextId": "val_stalker_photo_intro"
         },
         {
@@ -144,7 +274,14 @@
             "id": "val_stalker_scared",
             "sender": "valeria",
             "type": "text",
-            "content": "¡NO PUEDO! Mis padres no saben que volví... si llamo a la policía habrá un escándalo.",
+            "content": "¡NO PUEDO! Mis padres no saben que volví... si llamo a la policía habrá un escándalo. Además... no confío en ellos, {{name}}.",
+            "nextId": "val_stalker_police_fear"
+        },
+        {
+            "id": "val_stalker_police_fear",
+            "sender": "valeria",
+            "type": "text",
+            "content": "La última vez que involucré a la policía en un problema... bueno, las cosas terminaron muy mal para mí. Prefiero resolverlo de otra forma.",
             "nextId": "val_stalker_tension"
         },
         {

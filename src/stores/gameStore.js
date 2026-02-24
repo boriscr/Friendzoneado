@@ -19,7 +19,8 @@ export const useGameStore = defineStore('game', () => {
         mistery_level: 0,
         is_liar: false,
         is_boaster: false,
-        quiz_points: 0
+        quiz_points: 0,
+        knows_address: false
     })
 
     // ── Chat ────────────────────────────────────────────

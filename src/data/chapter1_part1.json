@@ -410,13 +410,20 @@
                 },
                 {
                     "text": "Zapatillas de lona recién compradas.",
-                    "nextId": "val_walk_q2"
+                    "nextId": "val_walk_q1_wrong"
                 },
                 {
                     "text": "Chancletas, para que el pie respire.",
-                    "nextId": "val_walk_q2"
+                    "nextId": "val_walk_q1_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_walk_q1_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Zapatillas de lona? ¿O chancletas? 😂 Me estás tomando el pelo, {{name}}. ¡Te vas a destrozar los pies en la primera loma!",
+            "nextId": "val_walk_q2"
         },
         {
             "id": "val_walk_q2",
@@ -440,13 +447,20 @@
                 },
                 {
                     "text": "La Vía de la Plata.",
-                    "nextId": "val_walk_q3"
+                    "nextId": "val_walk_q2_wrong"
                 },
                 {
                     "text": "La Senda del Oso.",
-                    "nextId": "val_walk_q3"
+                    "nextId": "val_walk_q2_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_walk_q2_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Frío, frío... ❄️ Esa era fácil, ¿eh? Hasta los que nunca han salido de su ciudad la conocen. Me parece que alguien está exagerando sus aventuras.",
+            "nextId": "val_walk_q3"
         },
         {
             "id": "val_walk_q3",
@@ -470,13 +484,20 @@
                 },
                 {
                     "text": "En el Sur, buscando el sol.",
-                    "nextId": "val_walk_q4"
+                    "nextId": "val_walk_q3_wrong"
                 },
                 {
                     "text": "En el Este, por donde sale el sol.",
-                    "nextId": "val_walk_q4"
+                    "nextId": "val_walk_q3_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_walk_q3_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Te habrías perdido a los diez minutos! 😂 El musgo busca la humedad, {{name}}. Es de primero de exploradores...",
+            "nextId": "val_walk_q4"
         },
         {
             "id": "val_walk_q4",
@@ -500,13 +521,20 @@
                 },
                 {
                     "text": "Rodilleras de neopreno.",
-                    "nextId": "val_walk_q5"
+                    "nextId": "val_walk_q4_wrong"
                 },
                 {
                     "text": "Una buena faja lumbar.",
-                    "nextId": "val_walk_q5"
+                    "nextId": "val_walk_q4_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_walk_q4_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm, no exactamente. Ayudan, pero los bastones son los que de verdad te salvan las articulaciones. ¡Sigamos!",
+            "nextId": "val_walk_q5"
         },
         {
             "id": "val_walk_q5",
@@ -542,7 +570,7 @@
             "id": "val_walk_quiz_result",
             "sender": "valeria",
             "type": "text",
-            "content": "Veamos si eres un senderista de verdad o solo das vueltas a la manzana...",
+            "content": "A ver... analicemos tu perfil de 'experto montañista'.",
             "conditions": [
                 {
                     "variable": "quiz_points",
@@ -563,6 +591,13 @@
                     "nextId": "val_walk_quiz_poor"
                 }
             ],
+            "nextId": "val_walk_quiz_fail_intro"
+        },
+        {
+            "id": "val_walk_quiz_fail_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Vaya... {{name}}. No sé por dónde empezar.",
             "nextId": "val_walk_quiz_fail"
         },
         {
@@ -606,7 +641,7 @@
             "id": "val_walk_quiz_fail",
             "sender": "valeria",
             "type": "text",
-            "content": "¡Eres un fraude! � No sabes nada de excursionismo. Confiesa, {{name}}, lo dijiste solo por decir.",
+            "content": "¡Eres un fraude! 😂 No sabes nada de excursionismo. Confiesa, {{name}}, lo dijiste solo por decir para parecer interesante.",
             "actions": [
                 {
                     "type": "set",
@@ -617,6 +652,66 @@
             "impact": {
                 "valeria_affection": -20
             },
+            "nextId": "choice_walk_excuse"
+        },
+        {
+            "id": "choice_walk_excuse",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Me atrapaste... La verdad es que lo máximo que camino es de mi cama al refrigerador. 😂",
+                    "nextId": "val_walk_excuse_admit",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                },
+                {
+                    "text": "¡Esos eran datos muy específicos! Pero sigo teniendo espíritu aventurero.",
+                    "nextId": "val_walk_excuse_double",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "Es que yo soy más de caminatas urbanas, el bosque me da alergia. 🤧",
+                    "nextId": "val_walk_excuse_joke",
+                    "impact": {
+                        "valeria_affection": 3
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_walk_excuse_admit",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Jajaja! Al menos eres honesto al final. Me tenías preocupada pensando en que me perderías en un cerro.",
+            "nextId": "val_walk_excuse_admit_2"
+        },
+        {
+            "id": "val_walk_excuse_admit_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Está bien, te perdono el engaño. Prefiero mil veces un amigo sincero que un 'experto' de mentira. 😉",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_walk_excuse_double",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sí, sí... por supuesto. Un espíritu aventurero que se pone chancletas para ir a la montaña. 😂 No me hagas reír, {{name}}.",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_walk_excuse_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Alergia al bosque? 😂 ¡Qué excusa tan mala! Pero eres gracioso, eso te salva de que te bloquee ahora mismo.",
             "nextId": "val_status_1"
         },
         {
@@ -655,9 +750,16 @@
                 },
                 {
                     "text": "Steven Spielberg.",
-                    "nextId": "val_movies_q2"
+                    "nextId": "val_movies_q1_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_movies_q1_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Spielberg? 😂 ¡Pero si esa es de las básicas, {{name}}! Veo que empezamos con el pie izquierdo... jaja",
+            "nextId": "val_movies_q2"
         },
         {
             "id": "val_movies_q2",
@@ -681,13 +783,20 @@
                 },
                 {
                     "text": "Scarface (El precio del poder).",
-                    "nextId": "val_movies_q3"
+                    "nextId": "val_movies_q2_wrong"
                 },
                 {
                     "text": "Goodfellas (Uno de los nuestros).",
-                    "nextId": "val_movies_q3"
+                    "nextId": "val_movies_q2_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_movies_q2_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Uy... cerca, pero no. 🤌 Esa es una de las frases más icónicas de la historia. Me estás preocupando...",
+            "nextId": "val_movies_q3"
         },
         {
             "id": "val_movies_q3",
@@ -711,13 +820,20 @@
                 },
                 {
                     "text": "Obi-Wan Kenobi.",
-                    "nextId": "val_movies_q4"
+                    "nextId": "val_movies_q3_wrong"
                 },
                 {
                     "text": "Emperador Palpatine.",
-                    "nextId": "val_movies_q4"
+                    "nextId": "val_movies_q3_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_movies_q3_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Sacrilegio! 😂 Hasta alguien que no ha visto la película sabe esa. Te estás inventando que te gusta el cine, ¿verdad?",
+            "nextId": "val_movies_q4"
         },
         {
             "id": "val_movies_q4",
@@ -741,13 +857,20 @@
                 },
                 {
                     "text": "Cliffhanger.",
-                    "nextId": "val_movies_q5"
+                    "nextId": "val_movies_q4_wrong"
                 },
                 {
                     "text": "Plot Twist.",
-                    "nextId": "val_movies_q5"
+                    "nextId": "val_movies_q4_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_movies_q4_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Nop. El Cliffhanger es para el final... esto es algo que mueve la trama. ¡Espera a que lleguemos al final del examen!",
+            "nextId": "val_movies_q5"
         },
         {
             "id": "val_movies_q5",
@@ -783,7 +906,7 @@
             "id": "val_movies_quiz_result",
             "sender": "valeria",
             "type": "text",
-            "content": "A ver si eres un crítico de cine de verdad...",
+            "content": "Mmm... veamos cómo te ha ido en este pequeño interrogatorio.",
             "conditions": [
                 {
                     "variable": "quiz_points",
@@ -804,6 +927,13 @@
                     "nextId": "val_movies_quiz_poor"
                 }
             ],
+            "nextId": "val_movies_quiz_fail_intro"
+        },
+        {
+            "id": "val_movies_quiz_fail_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Vaya... esto es un poco vergonzoso, {{name}}.",
             "nextId": "val_movies_quiz_fail"
         },
         {
@@ -840,14 +970,14 @@
             "id": "val_movies_quiz_success_2",
             "sender": "valeria",
             "type": "text",
-            "content": "Deberíamos ir al cine un día de estos, o mejor... venir a casa a ver algún clásico con palomitas. 😏",
+            "content": "Deberíamos ir al cine un día de estos, o mejor... venir a casa a ver algún clásico con palomitas.",
             "nextId": "val_status_1"
         },
         {
             "id": "val_movies_quiz_fail",
             "sender": "valeria",
             "type": "text",
-            "content": "¡Qué farsante! 😂 No tienes ni idea de cine. Lo dijiste por decir, ¿verdad?",
+            "content": "¡Qué farsante! 😂 No tienes ni idea de cine. Lo dijiste solo por impresionarme, ¿verdad?",
             "actions": [
                 {
                     "type": "set",
@@ -858,6 +988,66 @@
             "impact": {
                 "valeria_affection": -20
             },
+            "nextId": "choice_movies_excuse"
+        },
+        {
+            "id": "choice_movies_excuse",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Está bien, me atrapaste. Solo quería parecer interesante para ti... 😳",
+                    "nextId": "val_movies_excuse_admit",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "¡Es que me puse nervioso! Sigo sabiendo de cine, te lo juro.",
+                    "nextId": "val_movies_excuse_double",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "Lo que pasa es que esas eran muy comerciales, yo soy de cine de culto. 😉",
+                    "nextId": "val_movies_excuse_joke",
+                    "impact": {
+                        "valeria_affection": -5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_movies_excuse_admit",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Ay... {{name}}. No necesitas mentirme para impresionarme, tonto. Me gustas más cuando eres honesto.",
+            "nextId": "val_movies_excuse_admit_2"
+        },
+        {
+            "id": "val_movies_excuse_admit_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero bueno... te perdono esta vez por el esfuerzo exagerado que hiciste. 😂",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_movies_excuse_double",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jajaja, ¡sí, claro! Y yo soy la próxima ganadora del Oscar. No sigas, que va a ser peor.",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_movies_excuse_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué salida tan elegante! 😂 'Cine de culto'... se nota que no has cambiado nada. Sigues siendo un payaso cuando te atrapan.",
             "nextId": "val_status_1"
         },
         {
@@ -919,13 +1109,20 @@
                 },
                 {
                     "text": "Mozart, lo sabe todo el mundo.",
-                    "nextId": "val_music_q2"
+                    "nextId": "val_music_q1_wrong"
                 },
                 {
                     "text": "Bach, creo.",
-                    "nextId": "val_music_q2"
+                    "nextId": "val_music_q1_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_music_q1_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Mozart? ¿Bach? 😂 ¡No me digas eso! Esa intro es universal, {{name}}. Se nota que solo escuchas lo que suena en la radio... jaja",
+            "nextId": "val_music_q2"
         },
         {
             "id": "val_music_q2",
@@ -949,13 +1146,20 @@
                 },
                 {
                     "text": "El de 3/4, como el vals.",
-                    "nextId": "val_music_q3"
+                    "nextId": "val_music_q2_wrong"
                 },
                 {
                     "text": "El de 6/8.",
-                    "nextId": "val_music_q3"
+                    "nextId": "val_music_q2_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_music_q2_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Uy... fallaste. 🥁 El 4/4 es el rey absoluto, por eso se llama compasillo. Me parece que tu 'talento musical' está un poco oxidado.",
+            "nextId": "val_music_q3"
         },
         {
             "id": "val_music_q3",
@@ -979,13 +1183,20 @@
                 },
                 {
                     "text": "La nota Mi.",
-                    "nextId": "val_music_q4"
+                    "nextId": "val_music_q3_wrong"
                 },
                 {
                     "text": "La nota Si.",
-                    "nextId": "val_music_q4"
+                    "nextId": "val_music_q3_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_music_q3_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Nop! 😂 Precisamente se llama clave de SOL porque indica dónde está esa nota. ¡Vaya músico tenemos aquí! jaja",
+            "nextId": "val_music_q4"
         },
         {
             "id": "val_music_q4",
@@ -1051,7 +1262,7 @@
             "id": "val_music_quiz_result",
             "sender": "valeria",
             "type": "text",
-            "content": "A ver... déjame pensar en tus respuestas...",
+            "content": "A ver... veamos tu puntuación en mi conservatorio privado.",
             "conditions": [
                 {
                     "variable": "quiz_points",
@@ -1072,6 +1283,13 @@
                     "nextId": "val_music_quiz_poor"
                 }
             ],
+            "nextId": "val_music_quiz_fail_intro"
+        },
+        {
+            "id": "val_music_quiz_fail_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... esto suena un poco desafinado, {{name}}.",
             "nextId": "val_music_quiz_fail"
         },
         {
@@ -1115,7 +1333,7 @@
             "id": "val_music_quiz_fail",
             "sender": "valeria",
             "type": "text",
-            "content": "¡MENTIROSO! 😂 No has dado ni una. Ya veo que sigues siendo el mismo fanfarrón de siempre que quiere quedar bien.",
+            "content": "¡MENTIROSO! 😂 No has dado ni una. ¡Si hasta me dijiste que Mozart compuso la quinta! Veo que sigues siendo el mismo fanfarrón de siempre.",
             "actions": [
                 {
                     "type": "set",
@@ -1126,6 +1344,66 @@
             "impact": {
                 "valeria_affection": -20
             },
+            "nextId": "choice_music_excuse"
+        },
+        {
+            "id": "choice_music_excuse",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Lo siento Val... La verdad no sé nada de música clásica, solo quería impresionarte. 😅",
+                    "nextId": "val_music_excuse_admit",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                },
+                {
+                    "text": "¡Es que el examen me puso nervioso! Pero tengo buen oído, lo prometo.",
+                    "nextId": "val_music_excuse_double",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "Es que yo soy más de reggaetón y trap, lo clásico me aburre. 😂",
+                    "nextId": "val_music_excuse_joke",
+                    "impact": {
+                        "valeria_affection": 2
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_music_excuse_admit",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Jajaja! Pues te ha salido el tiro por la culata. Pero valoro que lo admitas al final.",
+            "nextId": "val_music_excuse_admit_2"
+        },
+        {
+            "id": "val_music_excuse_admit_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Si querías impresionarme, podrías haberme preguntado qué música me gusta a mí. No necesitas fingir ser quien no eres conmigo. 😉",
+            "impact": {
+                "valeria_affection": 10
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_music_excuse_double",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sí, sí... un oído de oro que confunde a Vivaldi con Wagner. 😂 Mejor cállate, {{name}}, que me vas a hacer llorar de risa.",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_music_excuse_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Al menos eres honesto! 😂 'Reggaetón'... no puedo decir que me sorprenda. Un día me tendrás que enseñar tus mejores pasos, entonces.",
             "nextId": "val_status_1"
         },
         {
@@ -1164,9 +1442,16 @@
                 },
                 {
                     "text": "Picasso, en su etapa cubista.",
-                    "nextId": "val_paint_q2"
+                    "nextId": "val_paint_q1_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_paint_q1_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Picasso? 😂 ¡Cualquiera que haya visto un reloj derretido sabe que es cosa de Dalí! Veo que tu 'terapia' de pintura no te ha enseñado mucho todavía... jaja",
+            "nextId": "val_paint_q2"
         },
         {
             "id": "val_paint_q2",
@@ -1190,13 +1475,20 @@
                 },
                 {
                     "text": "Sfumato.",
-                    "nextId": "val_paint_q3"
+                    "nextId": "val_paint_q2_wrong"
                 },
                 {
                     "text": "Impresionismo.",
-                    "nextId": "val_paint_q3"
+                    "nextId": "val_paint_q2_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_paint_q2_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Nop. El Sfumato es de Da Vinci... lo de Caravaggio es el puro drama del Claroscuro. ¡Pon más atención a tus lienzos! jaja",
+            "nextId": "val_paint_q3"
         },
         {
             "id": "val_paint_q3",
@@ -1220,13 +1512,20 @@
                 },
                 {
                     "text": "En el Louvre de París.",
-                    "nextId": "val_paint_q4"
+                    "nextId": "val_paint_q3_wrong"
                 },
                 {
                     "text": "En el Museo del Prado.",
-                    "nextId": "val_paint_q4"
+                    "nextId": "val_paint_q3_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_paint_q3_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué va! 😂 En el Louvre está la Mona Lisa, pero Van Gogh está al otro lado del charco. ¡Pon más atención, que te pierdes! jaja",
+            "nextId": "val_paint_q4"
         },
         {
             "id": "val_paint_q4",
@@ -1250,13 +1549,20 @@
                 },
                 {
                     "text": "Las Meninas.",
-                    "nextId": "val_paint_q5"
+                    "nextId": "val_paint_q4_wrong"
                 },
                 {
                     "text": "La Libertad guiando al pueblo.",
-                    "nextId": "val_paint_q5"
+                    "nextId": "val_paint_q4_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_paint_q4_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ay, {{name}}! 😂 ¡Las Meninas son de Velázquez! Y lo otro es francés... Se nota que el cubismo te confunde un poco. jaja",
+            "nextId": "val_paint_q5"
         },
         {
             "id": "val_paint_q5",
@@ -1280,19 +1586,26 @@
                 },
                 {
                     "text": "Tarsila do Amaral.",
-                    "nextId": "val_painting_quiz_result"
+                    "nextId": "val_paint_q5_wrong"
                 },
                 {
                     "text": "Remedios Varo.",
-                    "nextId": "val_painting_quiz_result"
+                    "nextId": "val_paint_q5_wrong"
                 }
             ]
+        },
+        {
+            "id": "val_paint_q5_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Frío, frío... ❄️ Esa era de las famosas, ¿eh? Hasta los que no saben de arte conocen a Frida. ¡Me parece que alguien está exagerando sus dotes! jaja",
+            "nextId": "val_painting_quiz_result"
         },
         {
             "id": "val_painting_quiz_result",
             "sender": "valeria",
             "type": "text",
-            "content": "Déjame ver qué tal te ha ido con los pinceles...",
+            "content": "A ver... veamos tu puntuación en mi galería privada.",
             "conditions": [
                 {
                     "variable": "quiz_points",
@@ -1313,6 +1626,13 @@
                     "nextId": "val_painting_quiz_poor"
                 }
             ],
+            "nextId": "val_painting_quiz_fail_intro"
+        },
+        {
+            "id": "val_painting_quiz_fail_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Vaya... {{name}}. Tus trazos son un poco confusos.",
             "nextId": "val_painting_quiz_fail"
         },
         {
@@ -1641,84 +1961,270 @@
             "nextId": "choice_hard_q3"
         },
         {
-            "id": "choice_hard_q3",
+            "id": "val_painting_quiz_fail",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡FANFARRÓN! 😂 No has dado ni una. ¡Si hasta confundiste a Frida Kahlo! Me juego lo que quieras a que lo de la 'terapia de pintura' fue una mentirijilla para impresionarme.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "is_boaster",
+                    "value": true
+                }
+            ],
+            "impact": {
+                "valeria_affection": -20
+            },
+            "nextId": "choice_painting_excuse"
+        },
+        {
+            "id": "choice_painting_excuse",
             "sender": "player",
             "type": "choice",
             "content": null,
             "choices": [
                 {
-                    "text": "Random Access Memory.",
-                    "nextId": "val_hard_q4",
+                    "text": "Está bien, me rindo. 🏳️ La verdad es que lo más artístico que hago es colorear por fuera de las líneas, solo quería parecer profundo.",
+                    "nextId": "val_painting_excuse_admit",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "¡Es que el arte es subjetivo! Lo que tú llamas error, yo lo llamo... visión vanguardista. 😉",
+                    "nextId": "val_painting_excuse_joke",
+                    "impact": {
+                        "valeria_affection": 3
+                    }
+                },
+                {
+                    "text": "Confieso que me puse nervioso y se me mezclaron todos los museos en la cabeza. 😵",
+                    "nextId": "val_painting_excuse_double",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_painting_excuse_admit",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Jajaja! Ay {{name}}... No necesitas ser un genio del Renacimiento para que me guste charlar contigo. Tu honestidad me gana mucho más.",
+            "nextId": "val_painting_excuse_admit_2"
+        },
+        {
+            "id": "val_painting_excuse_admit_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me gusta que lo admitas. Me hace sentir que todavía puedo confiar en ti, aunque intentes colarme alguna exageración de vez en cuando. 😉",
+            "impact": {
+                "valeria_affection": 12
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_painting_excuse_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué salida tan buena! 😂 'Visión vanguardista'... me has convencido solo por la audacia de usar esa frase después de fallar en todo. Eres un caso perdido, {{name}}.",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_painting_excuse_double",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Pobrecillo! 😂 Se te nota hasta por mensaje cuando te pones nervioso. Está bien, te voy a pasar el examen por esta vez, pero que no se repita. jaja",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_hobby_tech",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Tecnología? Vaya, pasaste de no saber ni encender la calculadora a ser un geek. A ver si es verdad... contestame esto.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "quiz_points",
+                    "value": 0
+                }
+            ],
+            "nextId": "val_tech_q1"
+        },
+        {
+            "id": "val_tech_q1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué significan las siglas 'HTML' en el mundo del desarrollo web?",
+            "nextId": "choice_tech_q1"
+        },
+        {
+            "id": "choice_tech_q1",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "HyperText Markup Language.",
+                    "nextId": "val_tech_q2",
                     "impact": {
                         "quiz_points": 1
                     }
                 },
                 {
-                    "text": "Ready Apple Module.",
-                    "nextId": "val_hard_q4"
+                    "text": "High Tech Multi Language.",
+                    "nextId": "val_tech_q1_wrong"
                 },
                 {
-                    "text": "Remote Access Monitor.",
-                    "nextId": "val_hard_q4"
+                    "text": "Home Tool Main Loop.",
+                    "nextId": "val_tech_q1_wrong"
                 }
             ]
         },
         {
-            "id": "val_hard_q4",
+            "id": "val_tech_q1_wrong",
             "sender": "valeria",
             "type": "text",
-            "content": "¿Cómo se llama la placa base donde se conectan todos los componentes?",
-            "nextId": "choice_hard_q4"
+            "content": "¡Nop! 😂 Empezamos mal. ¡Eso es lo más básico de lo básico! Se nota que tu 'mundo de código' tiene bastantes bugs... jaja",
+            "nextId": "val_tech_q2"
         },
         {
-            "id": "choice_hard_q4",
+            "id": "val_tech_q2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Cuál es el cerebro de la computadora, el componente que procesa todas las instrucciones?",
+            "nextId": "choice_tech_q2"
+        },
+        {
+            "id": "choice_tech_q2",
             "sender": "player",
             "type": "choice",
             "content": null,
             "choices": [
                 {
-                    "text": "Motherboard (Placa Madre).",
-                    "nextId": "val_hard_q5",
+                    "text": "CPU (Procesador).",
+                    "nextId": "val_tech_q3",
                     "impact": {
                         "quiz_points": 1
                     }
                 },
                 {
-                    "text": "Sound Card.",
-                    "nextId": "val_hard_q5"
+                    "text": "Memoria RAM.",
+                    "nextId": "val_tech_q2_wrong"
                 },
                 {
-                    "text": "Power Supply.",
-                    "nextId": "val_hard_q5"
+                    "text": "Disco Duro.",
+                    "nextId": "val_tech_q2_wrong"
                 }
             ]
         },
         {
-            "id": "val_hard_q5",
+            "id": "val_tech_q2_wrong",
             "sender": "valeria",
             "type": "text",
-            "content": "Y la última... ¿cuál es el estándar actual para conectar un monitor y transmitir video digital de alta definición?",
-            "nextId": "choice_hard_q5"
+            "content": "¡Casi! 😂 Esos son importantes, pero el cerebro es la CPU. ¡Repasa tus apuntes, geek de cartón! jaja",
+            "nextId": "val_tech_q3"
         },
         {
-            "id": "choice_hard_q5",
+            "id": "val_tech_q3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Qué lenguaje de programación es famoso por su logo de una taza de café? ☕",
+            "nextId": "choice_tech_q3"
+        },
+        {
+            "id": "choice_tech_q3",
             "sender": "player",
             "type": "choice",
             "content": null,
             "choices": [
                 {
-                    "text": "HDMI o DisplayPort.",
+                    "text": "Java.",
+                    "nextId": "val_tech_q4",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "Python.",
+                    "nextId": "val_tech_q3_wrong"
+                },
+                {
+                    "text": "JavaScript.",
+                    "nextId": "val_tech_q3_wrong"
+                }
+            ]
+        },
+        {
+            "id": "val_tech_q3_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Nop! 😂 Python es una serpiente... y JavaScript es otra cosa (aunque se llamen parecido). ¡Te falta cafeína! jaja",
+            "nextId": "val_tech_q4"
+        },
+        {
+            "id": "val_tech_q4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿A cuántos bits equivale un Byte?",
+            "nextId": "choice_tech_q4"
+        },
+        {
+            "id": "choice_tech_q4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "8 bits.",
+                    "nextId": "val_tech_q5",
+                    "impact": {
+                        "quiz_points": 1
+                    }
+                },
+                {
+                    "text": "10 bits.",
+                    "nextId": "val_tech_q4_wrong"
+                },
+                {
+                    "text": "16 bits.",
+                    "nextId": "val_tech_q4_wrong"
+                }
+            ]
+        },
+        {
+            "id": "val_tech_q4_wrong",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Ay no! 😂 ¿En qué escuela estudiaste tú? Jajaja ¡Es 8 de toda la vida! Se nota que tu almacenamiento está fallando.",
+            "nextId": "val_tech_q5"
+        },
+        {
+            "id": "val_tech_q5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y la última... ¿quién fue el fundador de Apple junto con Steve Wozniak?",
+            "nextId": "choice_tech_q5"
+        },
+        {
+            "id": "choice_tech_q5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Steve Jobs.",
                     "nextId": "val_tech_quiz_result",
                     "impact": {
                         "quiz_points": 1
                     }
                 },
                 {
-                    "text": "VGA.",
+                    "text": "Bill Gates.",
                     "nextId": "val_tech_quiz_result"
                 },
                 {
-                    "text": "USB 2.0.",
+                    "text": "Mark Zuckerberg.",
                     "nextId": "val_tech_quiz_result"
                 }
             ]
@@ -1727,7 +2233,7 @@
             "id": "val_tech_quiz_result",
             "sender": "valeria",
             "type": "text",
-            "content": "Déjame analizar tus respuestas técnicas...",
+            "content": "A ver... analizando tu potencia de procesamiento en mi nube personal.",
             "conditions": [
                 {
                     "variable": "quiz_points",
@@ -1748,50 +2254,57 @@
                     "nextId": "val_tech_quiz_poor"
                 }
             ],
-            "nextId": "val_tech_quiz_fail_final"
+            "nextId": "val_tech_quiz_fail_intro"
+        },
+        {
+            "id": "val_tech_quiz_fail_intro",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... parece que tienes algunos bugs críticos en tu sistema, {{name}}.",
+            "nextId": "val_tech_quiz_fail"
         },
         {
             "id": "val_tech_quiz_perfect",
             "sender": "valeria",
             "type": "text",
-            "content": "¡Cielos! Eres un auténtico experto. 💻 Me gusta ver que ahora tienes intereses tan... intelectuales. jaja",
+            "content": "¡Impresionante! 💻 De verdad eres un experto. Me has dejado en modo 'solo lectura', {{name}}.",
             "impact": {
                 "valeria_affection": 25
             },
-            "nextId": "val_status_1"
+            "nextId": "val_tech_quiz_success_2"
         },
         {
             "id": "val_tech_quiz_good",
             "sender": "valeria",
             "type": "text",
-            "content": "Nada mal. Se nota que de verdad trabajas de eso o al menos te apasiona. 😊",
+            "content": "Se nota que te defiendes bien en este mundo digital. Tienes un buen firewall contra la ignorancia. jaja",
             "impact": {
                 "valeria_affection": 10
             },
-            "nextId": "val_status_1"
+            "nextId": "val_tech_quiz_success_2"
         },
         {
             "id": "val_tech_quiz_poor",
             "sender": "valeria",
             "type": "text",
-            "content": "Mmm... creo que apenas estás aprendiendo, ¿no? Pero bueno, al menos lo intentaste.",
+            "content": "Bueno, al menos sabes que el café es Java. Ya es algo. jaja",
             "impact": {
                 "valeria_affection": -5
             },
             "nextId": "val_status_1"
         },
         {
-            "id": "val_tech_quiz_fail_final",
+            "id": "val_tech_quiz_success_2",
             "sender": "valeria",
             "type": "text",
-            "content": "¡LO SABÍA! 😂 Estás mintiendo de forma descarada. No has dado ni una.",
-            "nextId": "val_tech_quiz_fail_2"
+            "content": "Algún día te pediré que me ayudes con mi laptop... que me va más lenta que un caracol. 😂",
+            "nextId": "val_status_1"
         },
         {
-            "id": "val_tech_quiz_fail_2",
+            "id": "val_tech_quiz_fail",
             "sender": "valeria",
             "type": "text",
-            "content": "Eres un mentiroso, {{name}}. No me molestaría si no supieras, pero me molesta que intentes engañarme.",
+            "content": "¡MENTIROSO! 😂 No tienes ni idea de tecnología. ¡Si hasta confundiste la CPU con la RAM! Jajaja Solo querías parecer moderno para impresionarme.",
             "actions": [
                 {
                     "type": "set",
@@ -1802,6 +2315,66 @@
             "impact": {
                 "valeria_affection": -20
             },
+            "nextId": "choice_tech_excuse"
+        },
+        {
+            "id": "choice_tech_excuse",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Está bien, me rindo. 🏳️ La verdad es que de tecnología solo sé usar Instagram, pero quería que pensaras que soy inteligente.",
+                    "nextId": "val_tech_excuse_admit",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "¡Es que yo soy de hardware, no de teoría! Pregúntame cómo armar una PC y verás.",
+                    "nextId": "val_tech_excuse_double",
+                    "impact": {
+                        "valeria_affection": -2
+                    }
+                },
+                {
+                    "text": "Es que yo soy de Apple, ahí todo es más fácil y no hace falta saber esas cosas. 😂",
+                    "nextId": "val_tech_excuse_joke",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_tech_excuse_admit",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Jajaja! Ay {{name}}... No necesitas ser un genio de la informática para que me caigas bien. Tu honestidad vale mucho más.",
+            "nextId": "val_tech_excuse_admit_2"
+        },
+        {
+            "id": "val_tech_excuse_admit_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me gusta que lo admitas. Me hace sentir que todavía puedo confiar en ti, aunque intentes colarme alguna exageración de vez en cuando. 😉",
+            "impact": {
+                "valeria_affection": 12
+            },
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_tech_excuse_double",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Sí, claro! 😂 Un experto en hardware que no sabe qué es una CPU. No me hagas reír, {{name}}. ¡Eres un caso perdido! jaja",
+            "nextId": "val_status_1"
+        },
+        {
+            "id": "val_tech_excuse_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué salida tan buena! 😂 'De Apple'... la vieja confiable de los que no saben nada de informática. Eres un caso perdido, {{name}}.",
             "nextId": "val_status_1"
         },
         {
@@ -2101,28 +2674,321 @@
             "sender": "valeria",
             "type": "text",
             "content": "Gracias, {{name}}. Sabía que podía contar contigo para subirme el ánimo.",
-            "nextId": "val_serious_intro"
+            "nextId": "val_catchup_intro"
         },
         {
             "id": "val_photo_kind",
             "sender": "valeria",
             "type": "text",
-            "content": "Gracias, Val. 😊 La verdad es que me siento mucho más cómoda ahora que antes.",
-            "nextId": "val_mood_check"
+            "content": "Gracias, {{name}}. 😊 La verdad es que me siento mucho más cómoda ahora que antes.",
+            "nextId": "val_catchup_intro"
         },
         {
-            "id": "val_mood_check",
+            "id": "val_catchup_intro",
             "sender": "valeria",
             "type": "text",
-            "content": "La verdad es que estás un poco raro/a hoy... No pareces el mismo que conocí.",
+            "content": "Pero bueno... cuéntame, ¿qué tal te ha parecido mi cambio? Siento que estos dos años me han servido para encontrarme un poco más.",
+            "nextId": "choice_catchup_start"
+        },
+        {
+            "id": "choice_catchup_start",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Se nota que has madurado, Val. ¿Qué hiciste en todo este tiempo? 🌍",
+                    "nextId": "val_life_recap",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Dime la verdad, ¿sigues siendo igual de inquieta? ¿Qué hobbies tienes ahora? 🎨",
+                    "nextId": "val_hobby_catchup",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                },
+                {
+                    "text": "¿Y dónde estás viviendo ahora? Dijiste que te habías mudado. 🏠",
+                    "nextId": "val_home_details",
+                    "impact": {
+                        "valeria_affection": 3
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_life_recap",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Estuve viviendo en el sur un tiempo, me gané una beca para un taller de diseño social. Fue... intenso.",
+            "nextId": "val_life_recap_2"
+        },
+        {
+            "id": "val_life_recap_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Estar lejos de casa me obligó a valerme por mí misma. No fue fácil, {{name}}. Hubo días que extrañaba horrores a mis amigos... sobre todo a ti.",
+            "nextId": "choice_life_response"
+        },
+        {
+            "id": "choice_life_response",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Debió ser una experiencia increíble. Me alegra que lo lograras. ❤️",
+                    "nextId": "val_life_positive",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "¿Y por qué no llamaste antes si tanto me extrañabas? 🤨",
+                    "nextId": "val_life_confront",
+                    "impact": {
+                        "valeria_affection": -5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_life_positive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Lo fue. Me enseñó a apreciar más lo que tenemos cerca. Pero bueno, ya estoy de vuelta y no pienso perderme de nuevo.",
+            "nextId": "val_hobby_catchup"
+        },
+        {
+            "id": "val_life_confront",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Tenía miedo, {{name}}. Miedo de que ya hubieras hecho tu vida y yo solo fuera un recuerdo molesto. A veces es más fácil huir que enfrentar un 'hola'.",
+            "nextId": "val_hobby_catchup"
+        },
+        {
+            "id": "val_hobby_catchup",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Si supieras! Me volví fanática de la cerámica y el senderismo. Salir a la montaña me ayuda a desconectar del caos.",
+            "nextId": "val_hobby_catchup_2"
+        },
+        {
+            "id": "val_hobby_catchup_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y sigo con la fotografía, claro. Aunque ahora prefiero las cámaras analógicas, tienen ese 'algo' nostálgico que me encanta.",
+            "nextId": "choice_hobbies_feedback"
+        },
+        {
+            "id": "choice_hobbies_feedback",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Cerámica... wow, eso no me lo esperaba. Me encantaría ver qué haces. ✨",
+                    "nextId": "val_hobby_positive",
+                    "impact": {
+                        "valeria_affection": 7
+                    }
+                },
+                {
+                    "text": "¿Montaña? Tú que no podías subir ni dos pisos por escalera... 😂",
+                    "nextId": "val_hobby_joke",
+                    "impact": {
+                        "valeria_affection": 12
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_hobby_positive",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jajaja, ¡trato hecho! Te invitaré al taller algún día. Pero cuidado con ensuciarte mucho.",
+            "nextId": "val_home_details"
+        },
+        {
+            "id": "val_hobby_joke",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Oye! 😂 He entrenado mucho, ¿sabes? Ahora tengo unas piernas de acero. Un día de estos te llevaré conmigo y veremos quién llega primero arriba.",
+            "nextId": "val_home_details"
+        },
+        {
+            "id": "val_home_details",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Me mudé a un departamento cerca de la zona vieja, en el 'Barrio Olvidado'. Es... acogedor, aunque todavía vivo entre cajas.",
+            "nextId": "val_home_details_2"
+        },
+        {
+            "id": "val_home_details_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Es un cuarto piso por escalera (¡si, irónico!), pero tengo una vista de la ciudad que me hace olvidar el cansancio al llegar.",
+            "nextId": "choice_home_response"
+        },
+        {
+            "id": "choice_home_response",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Esa zona es hermosa. ¿Te sientes segura ahí? 🌆",
+                    "nextId": "val_home_safe",
+                    "impact": {
+                        "valeria_affection": 10
+                    }
+                },
+                {
+                    "text": "Barrio Olvidado... suena un poco tétrico, Val. Ten cuidado. 😳",
+                    "nextId": "val_home_scary",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_home_safe",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Sí, es tranquilo. Los vecinos son gente mayor que me regala fruta cuando me ven cargada con cajas. Me gusta la vibra que tiene.",
+            "nextId": "choice_address_ask"
+        },
+        {
+            "id": "val_home_scary",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Jajaja, ¡no es para tanto! Tiene su encanto bohemio. Aunque confieso que los pasillos de noche son un poco... cinematográficos.",
+            "nextId": "choice_address_ask"
+        },
+        {
+            "id": "choice_address_ask",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Oye Val, ¿y cuál es tu dirección exacta? Tal vez te dé una sorpresa y pase a saludarte algún día. 😉",
+                    "nextId": "val_address_reaction",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Mejor no me digas dónde es exactamente, no quiero que pienses que voy a ir a espiarte jaja.",
+                    "nextId": "val_address_safety",
+                    "impact": {
+                        "valeria_affection": 8
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_address_reaction",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Una sorpresa? ¡Qué atrevido! Jajaja. Mira que te tomo la palabra, {{name}}.",
+            "nextId": "val_address_check"
+        },
+        {
+            "id": "val_address_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "A ver... déjame pensar si confío lo suficiente en ti para darte mi ubicación secreta...",
             "conditions": [
                 {
                     "variable": "valeria_affection",
-                    "operator": "<",
-                    "value": 30,
-                    "nextId": "val_serious_intro"
+                    "operator": ">=",
+                    "value": 75,
+                    "nextId": "val_address_give"
                 }
             ],
+            "nextId": "val_address_refuse"
+        },
+        {
+            "id": "val_address_give",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Está bien, pero si apareces con un ramo de flores, ¡me muero! 😂 Vivo en la Calle Los Sauces 442, Depto 4B. Es el edificio con la puerta de madera tallada.",
+            "actions": [
+                {
+                    "type": "set",
+                    "variable": "knows_address",
+                    "value": true
+                }
+            ],
+            "nextId": "val_address_after"
+        },
+        {
+            "id": "val_address_refuse",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Mmm... creo que mejor te lo digo después. No es que no confíe en ti, pero me gusta mantener un poco el misterio, ¿no crees? 😏 Además, todavía tengo todo hecho un desastre.",
+            "nextId": "val_address_after"
+        },
+        {
+            "id": "val_address_after",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Pero igual, ya sé que si necesito ayuda para cargar cajas pesadas, tengo a quién llamar.",
+            "nextId": "val_status_check"
+        },
+        {
+            "id": "val_address_safety",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¡Qué caballero! Jajaja. No te preocupes, no pensaría eso de ti. Pero agradezco el detalle. Algún día te invitaré a ver la vista desde mi balcón.",
+            "nextId": "val_status_check"
+        },
+        {
+            "id": "val_status_check",
+            "sender": "valeria",
+            "type": "text",
+            "content": "¿Sabes qué es lo más raro de volver? Ver cómo todos parecen haber seguido adelante con sus vidas, novios, trabajos... y yo siento que apenas empiezo.",
+            "nextId": "choice_personal_status"
+        },
+        {
+            "id": "choice_personal_status",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¿Y tú? ¿No encontraste a nadie especial en estos dos años? 😶",
+                    "nextId": "val_status_love",
+                    "impact": {
+                        "valeria_affection": 5
+                    }
+                },
+                {
+                    "text": "Todos tenemos nuestro rimo, Val. Lo importante es que ya estás acá. 🤗",
+                    "nextId": "val_status_kind",
+                    "impact": {
+                        "valeria_affection": 15
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_status_love",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Tuve... algo. Pero nada que valiera la pena contar. Supongo que comparar a todo el mundo con lo que viví aquí hace que nadie gane. 😏",
+            "nextId": "val_status_kind"
+        },
+        {
+            "id": "val_status_kind",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Gracias, {{name}}. Por eso eres especial para mí. Pero bueno... basta de ponernos sentimentales, que me pongo tonta.",
             "nextId": "val_serious_intro"
         },
         {

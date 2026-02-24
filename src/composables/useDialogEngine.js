@@ -76,9 +76,14 @@ export function useDialogEngine() {
         }
     }
 
-    async function processNode(startNodeId) {
-        if (!startNodeId || store.isProcessing) return
+    async function processNode(startNodeId, force = false) {
+        if (!startNodeId) return
+        if (store.isProcessing && !force) {
+            console.warn(`[Engine] processNode called for "${startNodeId}" but already processing. skipping.`)
+            return
+        }
 
+        console.log(`[Engine] Starting processing from: ${startNodeId} (force: ${force})`)
         store.isProcessing = true
         try {
             let currentNodeToProcess = startNodeId
@@ -86,10 +91,11 @@ export function useDialogEngine() {
             while (currentNodeToProcess) {
                 const node = nodeMap.value[currentNodeToProcess]
                 if (!node) {
-                    console.warn(`Node "${currentNodeToProcess}" not found`)
+                    console.warn(`[Engine] Node "${currentNodeToProcess}" not found`)
                     break
                 }
 
+                console.log(`[Engine] Processing node: ${currentNodeToProcess} (${node.type})`)
                 store.currentNodeId = currentNodeToProcess
 
                 // ── Part end: transition to next part ──────────
@@ -111,6 +117,7 @@ export function useDialogEngine() {
                         text: replacePlaceholders(c.text)
                     }))
                     store.isWaitingForChoice = true
+                    console.log(`[Engine] Hit choice node: ${currentNodeToProcess}. Stopping loop.`)
                     break // Stop processing
                 }
 
@@ -121,10 +128,10 @@ export function useDialogEngine() {
                         store.isTyping = true
                         store.typingSender = node.sender
                         playSound('typing')
-                        await sleep(1500 + Math.random() * 1500)
+                        await sleep(1000 + Math.random() * 1000)
                         store.isTyping = false
                         store.typingSender = ''
-                        if (i < cycles - 1) await sleep(800 + Math.random() * 1200)
+                        if (i < cycles - 1) await sleep(500 + Math.random() * 500)
                     }
                     executeActions(node.actions)
                     currentNodeToProcess = node.nextId
@@ -136,10 +143,11 @@ export function useDialogEngine() {
                 // ── Simulate "reading" pause ───────────────────
                 if (store.lastWasPlayerChoice && node.sender !== 'player' && node.sender !== 'system') {
                     store.isReading = true
-                    await sleep(1000 + Math.random() * 2500)
+                    // Reduce reading delay to feel snappier
+                    await sleep(800 + Math.random() * 1200)
                     store.markLastPlayerMessageRead()
                     store.isReading = false
-                    await sleep(500 + Math.random() * 1500)
+                    await sleep(300 + Math.random() * 500)
                     store.lastWasPlayerChoice = false
                 }
 
@@ -147,10 +155,10 @@ export function useDialogEngine() {
                 const smartDelay = (() => {
                     if (node.delay && node.delay > 0) return node.delay
                     const content = node.content || ''
-                    if (node.type === 'audio') return 12000 + Math.random() * 6000
-                    if (node.type === 'image') return 3000 + Math.random() * 2000
-                    const charDelay = content.length * 60
-                    return Math.max(1500, Math.min(5000, charDelay)) + Math.random() * 500
+                    if (node.type === 'audio') return 8000 + Math.random() * 4000
+                    if (node.type === 'image') return 2000 + Math.random() * 1000
+                    const charDelay = content.length * 45 // Reduced from 60
+                    return Math.max(1000, Math.min(3500, charDelay)) + Math.random() * 300
                 })()
 
                 if (node.sender !== 'player' && node.sender !== 'system' && smartDelay > 0) {
@@ -163,7 +171,7 @@ export function useDialogEngine() {
                     store.isRecording = false
                     store.typingSender = ''
                 } else if (node.sender === 'system') {
-                    const sysPause = Math.max(1000, Math.min(3000, (node.content || '').length * 40))
+                    const sysPause = Math.max(800, Math.min(2000, (node.content || '').length * 30))
                     await sleep(node.delay || sysPause)
                 }
 
@@ -190,6 +198,8 @@ export function useDialogEngine() {
                 const condNextId = evaluateConditions(node.conditions)
                 currentNodeToProcess = condNextId || node.nextId
             }
+        } catch (e) {
+            console.error("[Engine] Error in processNode:", e)
         } finally {
             store.isProcessing = false
         }
@@ -198,11 +208,18 @@ export function useDialogEngine() {
     async function selectChoice(index) {
         if (!store.isWaitingForChoice) return
 
+        console.log(`[Engine] selectChoice called for index: ${index}`)
+
         // Immediately block further choices
         store.isWaitingForChoice = false
 
         const choice = store.currentChoices[index]
-        if (!choice) return
+        if (!choice) {
+            console.warn(`[Engine] Choice at index ${index} not found.`)
+            return
+        }
+
+        console.log(`[Engine] Player chose: "${choice.text}" -> nextId: ${choice.nextId}`)
 
         // Add the player's message to chat
         store.addMessage({
@@ -230,7 +247,10 @@ export function useDialogEngine() {
 
         // Process the next node
         if (choice.nextId) {
-            await processNode(choice.nextId)
+            console.log(`[Engine] Triggering processNode (FORCE) for nextId: "${choice.nextId}"`)
+            await processNode(choice.nextId, true)
+        } else {
+            console.warn(`[Engine] Choice has no nextId defined.`)
         }
     }
 
