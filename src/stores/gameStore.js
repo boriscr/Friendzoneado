@@ -17,6 +17,7 @@ export const useGameStore = defineStore('game', () => {
     const gameState = reactive({
         valeria_affection: 50,
         mistery_level: 0,
+        tension_level: 0,
         is_liar: false,
         is_boaster: false,
         quiz_points: 0,

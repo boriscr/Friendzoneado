@@ -38,6 +38,14 @@
             "content": null,
             "choices": [
                 {
+                    "text": "¿Valeria? ¿Cómo te atreves a escribirme después de dos años...?",
+                    "nextId": "val_reclaim_1",
+                    "impact": {
+                        "valeria_affection": -5,
+                        "tension_level": 10
+                    }
+                },
+                {
                     "text": "¿Valeria? ¡No puede ser! ¡Qué sorpresa! 😊",
                     "nextId": "val_greet_warm",
                     "impact": {
@@ -60,6 +68,99 @@
                     }
                 }
             ]
+        },
+        {
+            "id": "val_reclaim_1",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Lo sé... sabía que estarías enojado. No fue fácil para mí tampoco.",
+            "delay": 500,
+            "nextId": "choice_reclaim_2"
+        },
+        {
+            "id": "choice_reclaim_2",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Te fuiste sin despedirte. Ni un mensaje, ni una llamada. Simplemente desapareciste.",
+                    "nextId": "val_reclaim_2",
+                    "impact": {
+                        "tension_level": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_reclaim_2",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Fue todo un caos familiar, nos mudamos de un día para otro... Tenía miedo de decir adiós y no poder irme.",
+            "nextId": "choice_reclaim_3"
+        },
+        {
+            "id": "choice_reclaim_3",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Éramos inseparables, Val. Me dejaste solo con un montón de preguntas.",
+                    "nextId": "val_reclaim_3",
+                    "impact": {
+                        "valeria_affection": 2
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_reclaim_3",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Y me arrepiento cada día de eso. Por eso te busqué, porque necesito que sepas que nunca quise que terminara así.",
+            "nextId": "choice_reclaim_4"
+        },
+        {
+            "id": "choice_reclaim_4",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "¿Y qué esperas ahora? ¿Que todo vuelva a ser como antes por arte de magia?",
+                    "nextId": "val_reclaim_4"
+                }
+            ]
+        },
+        {
+            "id": "val_reclaim_4",
+            "sender": "valeria",
+            "type": "text",
+            "content": "No, sé que tomará tiempo. Pero me gustaría intentarlo... si tú quieres.",
+            "nextId": "choice_reclaim_5"
+        },
+        {
+            "id": "choice_reclaim_5",
+            "sender": "player",
+            "type": "choice",
+            "content": null,
+            "choices": [
+                {
+                    "text": "Me va a costar volver a confiar en ti, ¿lo sabes?",
+                    "nextId": "val_reclaim_5",
+                    "impact": {
+                        "mistery_level": 2
+                    }
+                }
+            ]
+        },
+        {
+            "id": "val_reclaim_5",
+            "sender": "valeria",
+            "type": "text",
+            "content": "Lo entiendo. Solo dame una oportunidad para demostrarte que sigo siendo la misma Val de siempre... solo un poco más madura (creo).",
+            "nextId": "val_memories_intro"
         },
         {
             "id": "val_greet_warm",
